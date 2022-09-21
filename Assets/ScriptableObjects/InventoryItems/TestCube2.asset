@@ -17,3 +17,4 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 157677e141b579645a4e83b741ffc1cb, type: 3}
   prefab: {fileID: 2969769249757982034, guid: b70651e33b84b694f8e8b09fc56aab0d, type: 3}
   type: 1
+  pickupSound: {fileID: 8300000, guid: bc5b0602b6a0cc84ea942470b78b7adf, type: 3}

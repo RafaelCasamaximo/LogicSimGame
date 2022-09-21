@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IInteractee
 {
-    public void HandleItemInteraction();
+    public void HandleItemInteraction(ObjectType objectType);
     public void InteractionSuccess();
     public void InteractionFailed();
 }

@@ -10,6 +10,7 @@ public class GridElement : MonoBehaviour
 {
 
     [SerializeField] public InventoryItem inventoryItem;
+    [SerializeField] private TextMeshProUGUI displayName;
     [SerializeField] private Image icon;
     [SerializeField] private TextMeshProUGUI quantity;
     [SerializeField] private GameObject tooltip;
@@ -20,6 +21,7 @@ public class GridElement : MonoBehaviour
     {
         inventoryItem = item;
         button.onClick.AddListener(delegate { HandleSelectItem(); });
+        displayName.text = item.data.displayName;
         icon.sprite = item.data.icon;
         tooltip.SetActive(true);
         if (item.stackSize <= 1)

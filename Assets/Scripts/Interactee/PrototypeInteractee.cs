@@ -2,17 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PrototypeInteractee : MonoBehaviour
+public class PrototypeInteractee : MonoBehaviour, IInteractee
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Requirement requirement;
+
+    public void HandleItemInteraction(ObjectType objectType)
     {
-        
+        if (requirement.CheckRequirements())
+        {
+            if (objectType == ObjectType.Consumable)
+            {
+                requirement.RemoveRequirementsFromInventory();
+            }
+            InteractionSuccess();
+        }
+        else
+        {
+            InteractionFailed();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void InteractionSuccess()
     {
-        
+        SoundManager.Instance.PlaySound(requirement.successClip);
+        LevelManager.Instance.LoadScene("TestSceneChange");
+    }
+
+    public void InteractionFailed()
+    {
+        SoundManager.Instance.PlaySound(requirement.failureClip);
+        Debug.Log("You don't meet the requirements: " + requirement);
     }
 }

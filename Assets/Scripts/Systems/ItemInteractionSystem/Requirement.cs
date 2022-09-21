@@ -1,18 +1,56 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class Requirement : MonoBehaviour
+[CreateAssetMenu(menuName = "Requirement")]
+public class Requirement : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
+    public InventoryItemData requiredSelectedItem;
+    public RequirementItem[] requirementItems;
+    public AudioClip successClip;
+    public AudioClip failureClip;
+
+    public bool CheckRequirements()
     {
+        bool isSatisfied = true;
+
+        if (requiredSelectedItem.id != InventorySystem.Instance.selectedItem.data.id)
+        {
+            isSatisfied = false;
+            return isSatisfied;
+        }
         
+        foreach (RequirementItem requirementItem in requirementItems)
+        {
+            InventoryItem inventoryItem = InventorySystem.Instance.Get(requirementItem.inventoryItemData);
+            if (inventoryItem is null)
+            {
+                isSatisfied = false;
+                break;
+            }
+            else if (inventoryItem.stackSize < requirementItem.quantity)
+            {
+                isSatisfied = false;
+                break;
+            }
+        }
+
+        return isSatisfied;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void RemoveRequirementsFromInventory()
     {
-        
+        foreach (RequirementItem requirementItem in requirementItems)
+        {
+            InventorySystem.Instance.Remove(requirementItem.inventoryItemData);
+        }
     }
+}
+
+[System.Serializable]
+public struct RequirementItem
+{
+    public InventoryItemData inventoryItemData;
+    public int quantity;
 }

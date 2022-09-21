@@ -19,4 +19,5 @@ public class InventoryItemData : ScriptableObject
     public Sprite icon;
     public GameObject prefab;
     public ObjectType type;
+    public AudioClip pickupSound;
 }

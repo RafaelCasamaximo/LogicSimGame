@@ -9,6 +9,7 @@ public class ItemObject : MonoBehaviour
     public void HandlePickupItem()
     {
         InventorySystem.Instance.Add(referenceItem);
+        SoundManager.Instance.PlaySound(referenceItem.pickupSound);
         Destroy(gameObject);
     }
 }

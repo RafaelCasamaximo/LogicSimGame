@@ -16,7 +16,7 @@ using UnityEngine.EventSystems;
 /// Um exemplo de uso pode ser visto aqui:
 /// https://forum.unity.com/threads/managing-state-of-ui.416286/
 /// </summary>
-public class GUIManager : Singleton<GUIManager>
+public class GUIManager : SingletonPersistent<GUIManager>
 {
     private Dictionary<string, GUIControl> _GUIs = new Dictionary<string, GUIControl>();
 

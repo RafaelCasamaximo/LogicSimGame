@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class PlayerHoldItem : MonoBehaviour
 {
@@ -21,8 +22,10 @@ public class PlayerHoldItem : MonoBehaviour
         Destroy(spawnedItem);
         holdedItem = InventorySystem.Instance.selectedItem;
         isHoldingItem = true;
-        // Fazer item aparecer na mão do player
+        // Fazer item aparecer na mão do player e nao castar shadows
         spawnedItem = Instantiate(InventorySystem.Instance.selectedItem.data.prefab, spawnPositon);
+        MeshRenderer spawnedItemMeshRenderer = spawnedItem.GetComponent<MeshRenderer>();
+        spawnedItemMeshRenderer.shadowCastingMode = ShadowCastingMode.Off;
         int LayerIgnoreRaycast = LayerMask.NameToLayer("Top Layer");
         spawnedItem.layer = LayerIgnoreRaycast;
     }
@@ -49,8 +52,9 @@ public class PlayerHoldItem : MonoBehaviour
                     if (!consumableHit.transform) return;
                     if (!consumableHit.collider.CompareTag("Interactee")) return;
                     IConsumable consumableItem = spawnedItem.GetComponent<IConsumable>();
-                    consumableItem.HandleUseItem();
-                    
+                    consumableItem?.HandleUseItem();
+                    IInteractee interactee = consumableHit.collider.gameObject.GetComponent<IInteractee>();
+                    interactee?.HandleItemInteraction(InventorySystem.Instance.selectedItem.data.type);
                 }
                 break;
             
@@ -62,15 +66,18 @@ public class PlayerHoldItem : MonoBehaviour
                     if (!durableHit.transform) return;
                     if (!durableHit.collider.CompareTag("Interactee")) return;
                     IDurable durableItem = spawnedItem.GetComponent<IDurable>();
-                    durableItem.HandleUseItem();
-                    
+                    durableItem?.HandleUseItem();
+                    IInteractee interactee = durableHit.collider.gameObject.GetComponent<IInteractee>();
+                    interactee?.HandleItemInteraction(InventorySystem.Instance.selectedItem.data.type);
                 }
                 break;
             
             case ObjectType.IndependentDurable:
                 IIndependentDurable independentDurableItem = spawnedItem.GetComponent<IIndependentDurable>();
-                independentDurableItem.HandleUseItem();
+                independentDurableItem?.HandleUseItem();
                 break;
+            
+            
         }
     }
 }

@@ -19,6 +19,6 @@ public class TestCubeController : MonoBehaviour, IConsumable
     public void HandleUseItem()
     {
         Debug.Log("TestCubeController - Consumable Item");
-        InventorySystem.Instance.Remove(InventorySystem.Instance.selectedItem.data);
+        //InventorySystem.Instance.Remove(InventorySystem.Instance.selectedItem.data);
     }
 }

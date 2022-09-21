@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventorySystem : Singleton<InventorySystem>
+public class InventorySystem : SingletonPersistent<InventorySystem>
 {
     private Dictionary<InventoryItemData, InventoryItem> _itemDict;
     public List<InventoryItem> inventory { get; private set; }
@@ -69,12 +69,7 @@ public class InventorySystem : Singleton<InventorySystem>
 
     public InventoryItem Get(InventoryItemData referenceData)
     {
-        if (_itemDict.TryGetValue(referenceData, out InventoryItem value))
-        {
-            return value;
-        }
-
-        return null;
+        return _itemDict.TryGetValue(referenceData, out InventoryItem value) ? value : null;
     }
 
     public void SelectItem(InventoryItem referenceData)
