@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.XR;
 
 /// <summary>
@@ -23,6 +24,7 @@ public enum GameState
     FreeGameplay = 1,
     OpenInventory = 2,
     StartDialogue = 3,
+    CircuitSimulator = 4,
 }
 
 
@@ -52,18 +54,35 @@ public class GameManager : Singleton<GameManager>
             case GameState.StartDialogue:
                 HandleStartDialogue();
                 break;
+            case GameState.CircuitSimulator:
+                HandleCircuitSimulator();
+                break;
         }
 
         // TODO: Aprender a utilizar o sistema de events para poder adicionar OnAfterStateChanged aqui 
     }
+
+    public void ChangeSceneMiddleware(GameState afterSceneChange)
+    {
+        //GUIManager.Instance.UnregisterAll();
+        ChangeState(afterSceneChange);
+    }
+
 
     private void HandleStart()
     {
         // Faz as configurações iniciais da cena
         GUIManager.Instance.HideAll();
         
-        // Altera para o próximo estado
-        ChangeState(GameState.FreeGameplay);
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "TestPlayeground":
+                ChangeState(GameState.FreeGameplay);
+                break;
+            case "CircuitSimulator":
+                ChangeState(GameState.CircuitSimulator);
+                break;
+        }
     }
 
     private void HandleFreeGameplay()
@@ -84,6 +103,11 @@ public class GameManager : Singleton<GameManager>
     {
         
         GUIManager.Instance.Show("DialogueGUI");
+    }
+
+    private void HandleCircuitSimulator()
+    {
+        
     }
 
 

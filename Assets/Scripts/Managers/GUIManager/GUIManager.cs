@@ -34,6 +34,11 @@ public class GUIManager : SingletonPersistent<GUIManager>
         _GUIs.Remove(guiControl.key);
     }
 
+    public void UnregisterAll()
+    {
+        _GUIs.Clear();
+    }
+
     public void Show(string GUIControlKey)
     {
         GUIControl result = null;

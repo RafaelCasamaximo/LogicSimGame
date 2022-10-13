@@ -32,6 +32,9 @@ public class PlayerLook : MonoBehaviour
         playerTransform.Rotate(Vector3.up * mouseX);
     }
     
+    /*
+     * Convenção de nome: Handle<Nome do Input Action><Nome do Mapping><Nome da Action>
+     */
     public void HandlePlayerMovementLook(InputAction.CallbackContext context)
     {
         _playerLookInput = context.ReadValue<Vector2>();

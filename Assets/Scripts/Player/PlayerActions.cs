@@ -15,6 +15,7 @@ public class PlayerActions : MonoBehaviour
     
     /*
      * Handlers do Movement InputMap
+     * Convenção de nome: Handle<Nome do Input Action><Nome do Mapping><Nome da Action>
      */
     public void HandlePlayerMovementOpenInventory(InputAction.CallbackContext context)
     {
@@ -25,6 +26,7 @@ public class PlayerActions : MonoBehaviour
     
     /*
      * Handlers do Dialogue InputMap
+     * Convenção de nome: Handle<Nome do Input Action><Nome do Mapping><Nome da Action>
      */
     public void HandlePlayerDialogueNextSentence(InputAction.CallbackContext context)
     {
