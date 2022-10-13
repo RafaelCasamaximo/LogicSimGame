@@ -41,4 +41,14 @@ public class PlayerActions : MonoBehaviour
         playerInput.SwitchCurrentActionMap("Movement");
         DialogueSystem.Instance.EndDialogue();
     }
+    
+    /*
+     * Handlers do Inventory InputMap
+     */
+    public void HandlePlayerInventoryClose(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        GameManager.Instance.ChangeState(GameState.FreeGameplay);
+        playerInput.SwitchCurrentActionMap("Movement");
+    }
 }

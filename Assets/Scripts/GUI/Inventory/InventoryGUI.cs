@@ -55,15 +55,4 @@ public class InventoryGUI : GUIControl
             EventSystem.current.SetSelectedGameObject(gridElementObj);
         }
     }
-    
-    
-    /*
-     * Handlers do Inventory InputMap
-     */
-    public void HandlePlayerInventoryClose(InputAction.CallbackContext context)
-    {
-        if (!context.performed) return;
-        GameManager.Instance.ChangeState(GameState.FreeGameplay);
-        playerInput.SwitchCurrentActionMap("Movement");
-    }
 }

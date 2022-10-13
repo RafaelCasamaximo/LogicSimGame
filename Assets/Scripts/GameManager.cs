@@ -20,19 +20,33 @@ using UnityEngine.XR;
 [Serializable]
 public enum GameState
 {
+    // Start
     Start = 0,
+    
+    // 1st Person Gameplay
     FreeGameplay = 1,
     OpenInventory = 2,
     StartDialogue = 3,
+    
+    // Circuit Simulator
     CircuitSimulator = 4,
+    CircuitSimulatorFreeCamera = 5,
+    CircuitSimulatorMoving = 6,
+    CircuitSimulatorInventory = 7,
+    CircuitSimulatorPlacingCircuits = 8,
+    CircuitSimulatorPlacingWires = 9,
+    CircuitSimulatorComparingOutput = 10,
 }
 
 
 public class GameManager : Singleton<GameManager>
 {
     public GameState State { get; private set; }
-    public PlayerInput playerInput;
-
+    public GameObject firstPersonPlayer;
+    public GameObject circuitSimulatorPlayer;
+    [NonSerialized] public PlayerInput playerInput;
+    [NonSerialized] public PlayerInput circuitSimulatorPlayerInput;
+    
     private void Start() => ChangeState(GameState.Start);
 
     public void ChangeState(GameState newState)
@@ -57,6 +71,24 @@ public class GameManager : Singleton<GameManager>
             case GameState.CircuitSimulator:
                 HandleCircuitSimulator();
                 break;
+            case GameState.CircuitSimulatorFreeCamera:
+                HandleCircuitSimulatorFreeCamera();
+                break;
+            case GameState.CircuitSimulatorMoving:
+                HandleCircuitSimulatorMoving();
+                break;
+            case GameState.CircuitSimulatorInventory:
+                HandleCircuitSimulatorInventory();
+                break;
+            case GameState.CircuitSimulatorPlacingCircuits:
+                HandleCircuitSimulatorPlacingCircuits();
+                break;
+            case GameState.CircuitSimulatorPlacingWires:
+                HandleCircuitSimulatorPlacingWires();
+                break;
+            case GameState.CircuitSimulatorComparingOutput:
+                HandleCircuitSimulatorComparingOutput();
+                break;
         }
 
         // TODO: Aprender a utilizar o sistema de events para poder adicionar OnAfterStateChanged aqui 
@@ -73,18 +105,24 @@ public class GameManager : Singleton<GameManager>
     {
         // Faz as configurações iniciais da cena
         GUIManager.Instance.HideAll();
-        
+
         switch (SceneManager.GetActiveScene().name)
         {
             case "TestPlayeground":
+                Debug.Log("Entrando em TestPlayeground");
+                var firstPersonPlayerInstance = Instantiate(firstPersonPlayer);
+                playerInput = firstPersonPlayerInstance.GetComponent<PlayerInput>();
                 ChangeState(GameState.FreeGameplay);
                 break;
             case "CircuitSimulator":
+                Debug.Log("Entrando em CircuitSimulator");
+                var circuitSimulatorPlayerInstance = Instantiate(circuitSimulatorPlayer);
+                circuitSimulatorPlayerInput = circuitSimulatorPlayerInstance.GetComponent<PlayerInput>();
                 ChangeState(GameState.CircuitSimulator);
                 break;
         }
     }
-
+    
     private void HandleFreeGameplay()
     {
         GameManagerUtilities.LockMouse();
@@ -92,7 +130,7 @@ public class GameManager : Singleton<GameManager>
         GUIManager.Instance.Show("PersistentGUI");
         playerInput.SwitchCurrentActionMap("Movement");
     }
-    
+
     private void HandleOpenInventory()
     {
         GameManagerUtilities.UnlockMouse();
@@ -101,13 +139,45 @@ public class GameManager : Singleton<GameManager>
 
     private void HandleStartDialogue()
     {
-        
+
         GUIManager.Instance.Show("DialogueGUI");
     }
 
     private void HandleCircuitSimulator()
     {
-        
+        Debug.Log(circuitSimulatorPlayerInput);
+        GameManagerUtilities.LockMouse();
+        GUIManager.Instance.HideAll();
+        ChangeState(GameState.CircuitSimulatorMoving);
+    }
+
+    private void HandleCircuitSimulatorFreeCamera()
+    {
+        circuitSimulatorPlayerInput.SwitchCurrentActionMap("FreeCamera");
+    }
+    
+    private void HandleCircuitSimulatorMoving()
+    {
+        circuitSimulatorPlayerInput.SwitchCurrentActionMap("Movement");
+    }
+    private void HandleCircuitSimulatorInventory()
+    {
+        circuitSimulatorPlayerInput.SwitchCurrentActionMap("Inventory");
+    }
+
+    private void HandleCircuitSimulatorPlacingCircuits()
+    {
+        circuitSimulatorPlayerInput.SwitchCurrentActionMap("PlacingCircuits");
+    }
+
+    private void HandleCircuitSimulatorPlacingWires()
+    {
+        circuitSimulatorPlayerInput.SwitchCurrentActionMap("PlacingWires");
+    }
+
+    private void HandleCircuitSimulatorComparingOutput()
+    {
+        circuitSimulatorPlayerInput.SwitchCurrentActionMap("ComparingOutput");
     }
 
 

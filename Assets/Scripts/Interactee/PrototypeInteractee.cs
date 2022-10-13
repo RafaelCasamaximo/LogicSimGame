@@ -25,7 +25,7 @@ public class PrototypeInteractee : MonoBehaviour, IInteractee
     public void InteractionSuccess()
     {
         SoundManager.Instance.PlaySound(requirement.successClip);
-        LevelManager.Instance.LoadScene("CircuitSimulator", GameState.CircuitSimulator);
+        LevelManager.Instance.LoadScene("CircuitSimulator", GameState.Start);
     }
 
     public void InteractionFailed()
