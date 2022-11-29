@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Responsável por tudo que o jogador pode interagir, seja seja com um item que pode ser coletado do ambiente (ItemObject) ou um trigger de dialogo ()DialogueTrigger
+/// Aplicar nos objetos que o jogador pode interagir mas não são relacionados com o consumo de itens, e sim a acquisição de novos. 
+/// </summary>
 public class PlayerInteract : MonoBehaviour
 {
     public string interactableTag;

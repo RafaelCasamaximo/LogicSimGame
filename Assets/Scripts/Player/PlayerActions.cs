@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Script atrelado as ações que o player pode tomar enquanto FreeState e no InventorySystem
+/// </summary>
 public class PlayerActions : MonoBehaviour
 {
     private PlayerInput playerInput;

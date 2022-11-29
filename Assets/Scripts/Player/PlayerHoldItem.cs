@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 
+/// <summary>
+/// Script responsável por instanciar objeto na mão do jogador quando ele é selecionado no inventário.
+/// Também é responsável por tirar o item da mão do jogador caso ele seja consumido e removido do inventário.
+/// </summary>
 public class PlayerHoldItem : MonoBehaviour
 {
     private bool isHoldingItem = false;

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Encapsula um item de inventario adicionando a quantidade disponível no inventário
+/// </summary>
 public class InventoryItem
 {
     public InventoryItemData data { get; private set; }

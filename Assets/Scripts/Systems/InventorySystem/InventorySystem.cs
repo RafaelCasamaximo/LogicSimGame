@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Sistema responsável por adicionar, remover, selecionar itens, e retornar valores referentes salvos dos itens que o jogador possui.
+/// </summary>
 public class InventorySystem : SingletonPersistent<InventorySystem>
 {
     private Dictionary<InventoryItemData, InventoryItem> _itemDict;

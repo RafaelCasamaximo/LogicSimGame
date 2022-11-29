@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Sistema de som do jogo. Deve ser atrelado ao EmpryObject respectivo. Cada uma das funções funciona de maneira independente. Os sons podem ser passados através do inspector.
+/// </summary>
 public class SoundManager : SingletonPersistent<SoundManager>
 {
 

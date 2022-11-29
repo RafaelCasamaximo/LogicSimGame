@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Funções auxiliares utilizadas no GameManager
+/// </summary>
 public class GameManagerUtilities : MonoBehaviour
 {
     public static void LockMouse()

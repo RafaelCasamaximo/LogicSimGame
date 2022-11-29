@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
+/// <summary>
+/// O Dialogue System é um singleton que permite que um dialogo seja invocado em qualquer momento do jogo, desde que haja o DialogueGUI instanciado na cena
+/// Ele altera e passa as sentenças do dialogo, inicia e fecha dialogos de acordo com as ações do player definida no InputController
+/// O DialogueSystem é invocado pelo DialogueTrigger
+/// </summary>
 public class DialogueSystem : SingletonPersistent<DialogueSystem>
 {
     

@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// ITEM DE TESTE
+/// Essa classe representa um interactee de teste no qual o jogador pode interagir E NÃO CONSOME O ITEM DO REQUIREMENT
+/// A interação depende de um requirement no inventario do player
+/// As funções  InteractionSuccess ou InteractionFailed representam os estados resultantes da função HandleItemInteraction.
+/// </summary>
 public class PrototypeInteractee : MonoBehaviour, IInteractee
 {
     [SerializeField] private Requirement requirement;

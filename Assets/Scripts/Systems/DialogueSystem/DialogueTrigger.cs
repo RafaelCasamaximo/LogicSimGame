@@ -12,6 +12,17 @@ public enum DialogueType
     ColliderExit = 2,
     Interact = 3,
 }
+
+/// <summary>
+/// O DialogueTrigger é o responsável por iniciar o DialogueSystem e fazer com que ele mostre a interface.
+/// Esse script deve ser atrelado aos objetos que terão algum dialogo relacionado a eles.
+/// Os 4 modos de dialogos são:
+/// Direto: pode ser invocado através de programação
+/// ColliderEnter: o dialogo inicia ao entrar numa área de um collider com isTrigger ativado
+/// ColliderExit: o dialogo inicia ao sair numa área de um collider com isTrigger ativado
+/// Interact: O dialogo inicia após o jogador interagir com o objeto que contém o script atrelado
+/// O modo pode ser configurado no inspector
+/// </summary>
 public class DialogueTrigger : MonoBehaviour
 {
     [SerializeField] public DialogueType dialogueType;

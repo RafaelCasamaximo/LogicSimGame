@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Essa classe faz o gerenciamento de cenas e levels dentro da Unity
+/// TODO: Fazer com que ela identifique os scripts herdados no DontDestroyOnLoad (todos os base). Isso faz com que o jogo tenha que iniciar em uma cena de FreeGameplay ou gerencie o estado por cena com o GameManager
+/// </summary>
 public class LevelManager : SingletonPersistent<LevelManager>
 {
     public async void LoadScene(string sceneName)

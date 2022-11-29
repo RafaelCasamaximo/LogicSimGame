@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// Classe auxiliar responsável por desenhar o item selecionado na mão do player e atualizar quando necessário (utilizado, alterado ou removido)
+/// </summary>
 public class PersistentItemElement : MonoBehaviour
 {
     
@@ -11,8 +14,7 @@ public class PersistentItemElement : MonoBehaviour
     [SerializeField] private Image icon;
     [SerializeField] private TextMeshProUGUI quantity;
     [SerializeField] private GameObject tooltip;
-
-
+    
     public void Set(InventoryItem item)
     {
         if (item is null)
