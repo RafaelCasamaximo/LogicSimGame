@@ -112,6 +112,7 @@ public class GameManager : Singleton<GameManager>
                 Debug.Log("Entrando em TestPlayeground");
                 var firstPersonPlayerInstance = Instantiate(firstPersonPlayer);
                 playerInput = firstPersonPlayerInstance.GetComponent<PlayerInput>();
+                DialogueSystem.Instance.playerInput = playerInput;
                 ChangeState(GameState.FreeGameplay);
                 break;
             case "CircuitSimulator":
@@ -119,6 +120,13 @@ public class GameManager : Singleton<GameManager>
                 var circuitSimulatorPlayerInstance = Instantiate(circuitSimulatorPlayer);
                 circuitSimulatorPlayerInput = circuitSimulatorPlayerInstance.GetComponent<PlayerInput>();
                 ChangeState(GameState.CircuitSimulator);
+                break;
+            case "MainHub":
+                Debug.Log("Entrando em MainHub");
+                var firstPersonPlayerMainHubInstance = Instantiate(firstPersonPlayer);
+                playerInput = firstPersonPlayerMainHubInstance.GetComponent<PlayerInput>();
+                DialogueSystem.Instance.playerInput = playerInput;
+                ChangeState(GameState.FreeGameplay);
                 break;
         }
     }

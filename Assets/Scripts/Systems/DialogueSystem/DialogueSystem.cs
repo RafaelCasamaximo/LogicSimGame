@@ -19,6 +19,7 @@ public class DialogueSystem : SingletonPersistent<DialogueSystem>
     void Start()
     {
         sentences = new Queue<string>();
+        Debug.Log("");
     }
     
     public void StartDialogue(Dialogue dialogue)

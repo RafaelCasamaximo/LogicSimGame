@@ -26,7 +26,7 @@ public enum DialogueType
 public class DialogueTrigger : MonoBehaviour
 {
     [SerializeField] public DialogueType dialogueType;
-    public Dialogue dialogue;
+    [SerializeField] public Dialogue dialogue;
 
     public void DirectTriggerDialogue()
     {

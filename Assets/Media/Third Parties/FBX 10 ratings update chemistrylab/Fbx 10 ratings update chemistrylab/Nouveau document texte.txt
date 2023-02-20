@@ -1,0 +1,14 @@
+atoms
+barrel
+centrifuge
+chairwithwheels
+cork
+cupboard
+fireextinguisher
+globe
+labdemoscene
+microscope
+solarsystem
+new table
+differents types of vials
+vialholders

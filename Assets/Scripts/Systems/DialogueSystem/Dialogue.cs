@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ using UnityEngine;
 /// Script responsável pelos dialogos
 /// É instanciado e definido no DialogueSystem e invocado no DialogueTrigger e DialogueGUI
 /// </summary>
+[Serializable]
 public class Dialogue
 {
 
