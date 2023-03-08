@@ -10,6 +10,7 @@ public class CircuitSimulatorRenderer : MonoBehaviour
     /// Parametros para os tilemaps do fundo e o tile do cursor e suas variações que serão usados para popular
     /// </summary>
     [SerializeField] private Tilemap backgroundTilemap;
+    [SerializeField] private Tilemap LogicGatesTileMap;
     [SerializeField] private Tilemap cursorTilemap;
 
     #endregion
