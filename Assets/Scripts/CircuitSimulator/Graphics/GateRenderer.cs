@@ -18,89 +18,37 @@ public enum LogicGate
     Reader = 8
 }
 
-public class GateRenderer : MonoBehaviour
+public abstract class GateRenderer : MonoBehaviour
 {
-    public LogicGate logicGate;
+    public LogicGate logicGate { get; set; }
     public TileBase gateTileBase;
-    private Gate gate;
-    private Vector2Int size;
+    public Gate gate;
+    public Vector2Int size;
     // InputLocations and outputLocation is set according to the
     // Top-left element as (1,1) and the bottom-right as (n, n).
-    private List<Vector2Int> inputLocations = new List<Vector2Int>();
-    private Vector2Int outputLocation;
+    public List<Vector2Int> inputLocations = new List<Vector2Int>();
+    public Vector2Int outputLocation;
 
+    public abstract void Initialize(Vector3Int gridPosition);
 
-    // Start is called before the first frame update
-    void Start()
+    public virtual void AddInput(GateRenderer gateRenderer)
     {
-
+        gate.AddInput(gateRenderer.gate);
+    }
+    
+    public virtual void SetInput(int index, GateRenderer gateRenderer)
+    {
+        gate.SetInput(index, gateRenderer.gate);
+    }
+    
+    public virtual void SetOutput(bool value)
+    {
+        gate.SetOutput(value);
     }
 
-    public void Initialize(Tilemap tilemap, Vector3Int gridPosition)
+    public virtual bool GetOutput()
     {
-        switch (logicGate)
-        {
-            case LogicGate.Generator:
-                gate = new GeneratorGate(false);
-                size = new Vector2Int(1, 1);
-                outputLocation = new Vector2Int(1, 1);
-                break;
-            case LogicGate.AND:
-                gate = new ANDGate();
-                size = new Vector2Int(3, 3);
-                inputLocations.Add(new Vector2Int(1, 1));
-                inputLocations.Add(new Vector2Int(3, 1));
-                outputLocation = new Vector2Int(2, 3);
-                break;
-            case LogicGate.NAND:
-                gate = new NANDGate();
-                size = new Vector2Int(3, 3);
-                inputLocations.Add(new Vector2Int(1, 1));
-                inputLocations.Add(new Vector2Int(3, 1));
-                outputLocation = new Vector2Int(2, 3);
-                break;
-            case LogicGate.OR:
-                gate = new ORGate();
-                size = new Vector2Int(3, 3);
-                inputLocations.Add(new Vector2Int(1, 1));
-                inputLocations.Add(new Vector2Int(3, 1));
-                outputLocation = new Vector2Int(2, 3);
-                break;
-            case LogicGate.NOR:
-                gate = new NORGate();
-                size = new Vector2Int(3, 3);
-                inputLocations.Add(new Vector2Int(1, 1));
-                inputLocations.Add(new Vector2Int(3, 1));
-                outputLocation = new Vector2Int(2, 3);
-                break;
-            case LogicGate.XOR:
-                gate = new XORGate();
-                size = new Vector2Int(3, 3);
-                inputLocations.Add(new Vector2Int(1, 1));
-                inputLocations.Add(new Vector2Int(3, 1));
-                outputLocation = new Vector2Int(2, 3);
-                break;
-            case LogicGate.XNOR:
-                gate = new XNORGate();
-                size = new Vector2Int(3, 3);
-                inputLocations.Add(new Vector2Int(1, 1));
-                inputLocations.Add(new Vector2Int(3, 1));
-                outputLocation = new Vector2Int(2, 3);
-                break;
-            case LogicGate.NOT:
-                gate = new NOTGate();
-                size = new Vector2Int(2, 1);
-                inputLocations.Add(new Vector2Int(1, 1));
-                outputLocation = new Vector2Int(1, 2);
-                break;
-            case LogicGate.Reader:
-                gate = new ReaderGate();
-                size = new Vector2Int(1, 1);
-                inputLocations.Add(new Vector2Int(1, 1));
-                break;
-        }
-
-        tilemap.SetTile(gridPosition, gateTileBase);
+        return gate.GetOutput();
     }
 
     // Update is called once per frame

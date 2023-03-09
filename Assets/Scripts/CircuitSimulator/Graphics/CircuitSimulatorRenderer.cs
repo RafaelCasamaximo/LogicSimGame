@@ -9,9 +9,9 @@ public class CircuitSimulatorRenderer : MonoBehaviour
     /// <summary>
     /// Parametros para os tilemaps do fundo e o tile do cursor e suas variações que serão usados para popular
     /// </summary>
-    [SerializeField] private Tilemap backgroundTilemap;
-    [SerializeField] private Tilemap LogicGatesTileMap;
-    [SerializeField] private Tilemap cursorTilemap;
+    [SerializeField] public Tilemap backgroundTilemap;
+    [SerializeField] public Tilemap logicGatesTileMap;
+    [SerializeField] public Tilemap cursorTilemap;
 
     #endregion
 
@@ -21,6 +21,8 @@ public class CircuitSimulatorRenderer : MonoBehaviour
     /// </summary>
     [SerializeField] private TileBase backgroundTileBase;
     [SerializeField] private TileBase cursorTileBase;
+    // Seria interessante os LogicGatesTiles ficarem juntos do Graphics e não do Core
+    // [SerializeField] public List<TileBase> LogicGatesTiles;
 
     #endregion
 

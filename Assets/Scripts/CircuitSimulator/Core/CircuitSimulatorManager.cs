@@ -12,7 +12,8 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
 {
     public int backgroundWidth;
     public int backgroundHeight;
-    
+    public List<TileBase> logicGatesTiles;
+
     /// <summary>
     /// Módulo de renderização do circuitSimulator
     /// </summary>
@@ -24,35 +25,50 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
         circuitSimulatorRenderer.height = backgroundHeight;
         circuitSimulatorRenderer.FillBackground();
         
-
         // Gera 3 fontes
-        var g1 = new GeneratorGate(true);
-        var g2 = new GeneratorGate(false);
-        var g3 = new GeneratorGate(true);
+        var g1 = gameObject.AddComponent<GeneratorGateRenderer>();
+        g1.Initialize(new Vector3Int(3, 3));
+        var g2 = gameObject.AddComponent<GeneratorGateRenderer>();
+        g2.Initialize(new Vector3Int(3, 4));
+        var g3 = gameObject.AddComponent<GeneratorGateRenderer>();
+        g3.Initialize(new Vector3Int(3, 5));
+        
+        g1.SetValue(true);
+        g2.SetValue(false);
+        g3.SetValue(true);
         
         // Faz AND entre g1 e g2
-        var and = new ANDGate();
+        var and = gameObject.AddComponent<ANDGateRenderer>();
+        and.Initialize(new Vector3Int(5, 4));
+        
         and.AddInput(g1);
         and.AddInput(g2);
         
+        
         // Faz OR entre resultado da AND e g3
-        var or = new ORGate();
+        var or = gameObject.AddComponent<ORGateRenderer>();
+        or.Initialize(new Vector3Int(8, 7));
+        
         or.AddInput(and);
         or.AddInput(g3);
         
         // Salva no leitor o resultado da AND
-        var r1 = new ReaderGate();
+        var r1 = gameObject.AddComponent<ReaderGateRenderer>();
+        r1.Initialize(new Vector3Int(9, 3));
+        
         r1.AddInput(and);
         
         // Salva no leitor o resultado da OR entre o resultado da AND e g3
-        var r2 = new ReaderGate();
+        var r2 = gameObject.AddComponent<ReaderGateRenderer>();
+        r2.Initialize(new Vector3Int(9, 4));
+        
         r2.AddInput(or);
         
         // Imprime Resultados
         Debug.Log("Saida TRUE [AND] FALSE: " + r1.GetOutput());
         Debug.Log("Saida (TRUE [AND] FALSE) [OR] TRUE: " + r2.GetOutput());
         
-        
+        // Altera o valor e faz a propagation
         g3.SetValue(false);
         Debug.Log("Saida TRUE [AND] FALSE: " + r1.GetOutput());
         Debug.Log("Saida (TRUE [AND] FALSE) [OR] FALSE: " + r2.GetOutput());
