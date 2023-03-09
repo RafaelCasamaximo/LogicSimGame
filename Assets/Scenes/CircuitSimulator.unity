@@ -186,7 +186,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 538501737}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!483693784 &475642527
 TilemapRenderer:
@@ -228,7 +228,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -319,8 +319,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1142861117}
-  - {fileID: 475642526}
   - {fileID: 933556079}
+  - {fileID: 475642526}
   m_Father: {fileID: 60057746}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -360,10 +360,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 82b02b6d555b14a4d9202a4d540dff7c, type: 2}
   - {fileID: 11400000, guid: b0b3090a50a874d41aa82f6fcd9f7e58, type: 2}
   - {fileID: 11400000, guid: 0d6ff379039d74b42a8371926e57863f, type: 2}
-  - {fileID: 11400000, guid: d2e4728b763871b41ba815f232112c8f, type: 2}
   - {fileID: 11400000, guid: 154818b32dff6d0469bf8cbb75eaf35a, type: 2}
-  - {fileID: 11400000, guid: cd73739be540af046828a8ba7f90c8ca, type: 2}
+  - {fileID: 11400000, guid: d2e4728b763871b41ba815f232112c8f, type: 2}
   - {fileID: 11400000, guid: 357946b2607b2ae4f8b2d135675a2ac8, type: 2}
+  - {fileID: 11400000, guid: cd73739be540af046828a8ba7f90c8ca, type: 2}
   - {fileID: 11400000, guid: b7a78bb1de9f6974695b50ae7d5d2e9f, type: 2}
   - {fileID: 11400000, guid: 82b02b6d555b14a4d9202a4d540dff7c, type: 2}
   circuitSimulatorRenderer: {fileID: 0}
@@ -398,7 +398,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 538501737}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!483693784 &933556080
 TilemapRenderer:
@@ -440,7 +440,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16

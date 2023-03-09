@@ -28,6 +28,7 @@ public abstract class GateRenderer : MonoBehaviour
     // Top-left element as (1,1) and the bottom-right as (n, n).
     public List<Vector2Int> inputLocations = new List<Vector2Int>();
     public Vector2Int outputLocation;
+    public List<WireRenderer> wires = new List<WireRenderer>();
 
     public abstract void Initialize(Vector3Int gridPosition);
 

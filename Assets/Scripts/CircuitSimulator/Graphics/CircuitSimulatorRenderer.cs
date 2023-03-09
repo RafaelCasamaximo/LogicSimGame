@@ -63,13 +63,7 @@ public class CircuitSimulatorRenderer : MonoBehaviour
     /// <param name="newCursorPosition">Novo Vector3Int da posição do cursor</param>
     public void ChangeCursorPosition(Vector3Int newCursorPosition)
     {
-        for (int i = 0; i < width; i++)
-        {
-            for (int j = 0; j < height; j++)
-            {
-                cursorTilemap.SetTile(new Vector3Int(i, j), backgroundTileBase);
-            }
-        }
+        cursorTilemap.ClearAllTiles();
         newCursorPosition.x = Mathf.Clamp(newCursorPosition.x, 0, width);
         newCursorPosition.y = Mathf.Clamp(newCursorPosition.y, 0, height);
         cursorTilemap.SetTile(newCursorPosition, cursorTileBase);
