@@ -17,4 +17,14 @@ public class NOTGate : Gate
     {
         return !inputs[0].GetOutput();
     }
+    
+    public override void Initialize(Vector3Int gridPosition)
+    {
+        outputWires = new List<WireRenderer>();
+        size = new Vector2Int(1, 2);
+        inputLocations.Add(new Vector2Int(1, 1));
+        outputLocation = new Vector2Int(1, 2);
+        gateTileBase = CircuitSimulatorManager.Instance.logicGatesTiles[(int)LogicGate.NOT];
+        CircuitSimulatorManager.Instance.circuitSimulatorRenderer.logicGatesTileMap.SetTile(gridPosition, gateTileBase);
+    }
 }
