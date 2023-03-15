@@ -46,7 +46,6 @@ public class CircuitSimulatorMovement : MonoBehaviour
     public void HandleCircuitSimulatorMovementMove(InputAction.CallbackContext context)
     {
         frameCounter = 0;
-        Debug.Log(context);
         if (context.canceled)
         {
             cursorMovement = Vector2.zero;

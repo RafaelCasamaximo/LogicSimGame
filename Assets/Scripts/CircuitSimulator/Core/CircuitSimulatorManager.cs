@@ -24,6 +24,7 @@ public enum LogicGate
 /// </summary>
 public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
 {
+    public Grid grid;
     public int backgroundWidth;
     public int backgroundHeight;
     public List<TileBase> logicGatesTiles;
@@ -34,6 +35,7 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
     public CircuitSimulatorRenderer circuitSimulatorRenderer;
     void Start()
     {
+        grid = GetComponent<Grid>();
         circuitSimulatorRenderer = GetComponent<CircuitSimulatorRenderer>();
         circuitSimulatorRenderer.width = backgroundWidth;
         circuitSimulatorRenderer.height = backgroundHeight;

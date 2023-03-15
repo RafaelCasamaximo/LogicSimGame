@@ -153,7 +153,6 @@ public class GameManager : Singleton<GameManager>
 
     private void HandleCircuitSimulator()
     {
-        Debug.Log(circuitSimulatorPlayerInput);
         GameManagerUtilities.LockMouse();
         GUIManager.Instance.HideAll();
         ChangeState(GameState.CircuitSimulatorMoving);

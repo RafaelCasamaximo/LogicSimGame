@@ -33,9 +33,10 @@ public class GeneratorGate : Gate
     
     public override void Initialize(Vector3Int gridPosition)
     {
+        position = gridPosition;
         outputWires = new List<WireRenderer>();
-        size = new Vector2Int(1, 1);
-        outputLocation = new Vector2Int(1, 1);
+        size = new Vector2Int(0 + position.x, 0 + position.y);
+        outputLocation = new Vector2Int(position.x, position.y);
         gateTileBase = CircuitSimulatorManager.Instance.logicGatesTiles[(int)LogicGate.Generator];
         CircuitSimulatorManager.Instance.circuitSimulatorRenderer.logicGatesTileMap.SetTile(gridPosition, gateTileBase);
     }

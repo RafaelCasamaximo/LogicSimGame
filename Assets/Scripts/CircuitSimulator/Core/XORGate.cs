@@ -13,9 +13,10 @@ public class XORGate : Gate
     {
         outputWires = new List<WireRenderer>();
         size = new Vector2Int(3, 3);
-        inputLocations.Add(new Vector2Int(1, 1));
-        inputLocations.Add(new Vector2Int(3, 1));
-        outputLocation = new Vector2Int(2, 3);
+        position = gridPosition;
+        inputLocations.Add(new Vector2Int(gridPosition.x - 1, gridPosition.y + 1));
+        inputLocations.Add(new Vector2Int(gridPosition.x - 1, gridPosition.y - 1));
+        outputLocation = new Vector2Int(gridPosition.x + 1, gridPosition.y);
         gateTileBase = CircuitSimulatorManager.Instance.logicGatesTiles[(int)LogicGate.XOR];
         CircuitSimulatorManager.Instance.circuitSimulatorRenderer.logicGatesTileMap.SetTile(gridPosition, gateTileBase);
     }

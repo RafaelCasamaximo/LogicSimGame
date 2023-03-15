@@ -20,6 +20,7 @@ public class NOTGate : Gate
     
     public override void Initialize(Vector3Int gridPosition)
     {
+        position = gridPosition;
         outputWires = new List<WireRenderer>();
         size = new Vector2Int(1, 2);
         inputLocations.Add(new Vector2Int(1, 1));

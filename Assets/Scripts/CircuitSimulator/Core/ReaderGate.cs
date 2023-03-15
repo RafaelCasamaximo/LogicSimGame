@@ -24,9 +24,10 @@ public class ReaderGate : Gate
     
     public override void Initialize(Vector3Int gridPosition)
     {
+        position = gridPosition;
         outputWires = new List<WireRenderer>();
-        size = new Vector2Int(1, 1);
-        inputLocations.Add(new Vector2Int(1, 1));
+        size = new Vector2Int(0 + position.x, 0 + position.y);
+        inputLocations.Add(new Vector2Int(0 + gridPosition.x, 0 + gridPosition.y));
         gateTileBase = CircuitSimulatorManager.Instance.logicGatesTiles[(int)LogicGate.Reader];
         CircuitSimulatorManager.Instance.circuitSimulatorRenderer.logicGatesTileMap.SetTile(gridPosition, gateTileBase);
     }
