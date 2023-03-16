@@ -12,7 +12,7 @@ public abstract class Gate : MonoBehaviour
     /// </summary>
     public List<Gate> inputs = new List<Gate>();
     public event Action OutputChanged;
-    private bool output;
+    protected bool output;
 
     /// <summary>
     /// This part is Responsible for the
@@ -31,7 +31,7 @@ public abstract class Gate : MonoBehaviour
         inputs.Add(gate);
         gate.OutputChanged += OnInputChanged;
         WireRenderer wire = gameObject.AddComponent<WireRenderer>();
-        wire.Initialize(gate.outputLocation, inputLocations[inputs.Count - 1]);
+        wire.Initialize(gate.outputLocation, inputLocations[inputs.Count - 1], gate.GetOutput());
         gate.outputWires.Add(wire);
 
         // Essa verificação existe para que o método não tente ser acionado logo após a inserção do 1o input.
@@ -68,12 +68,20 @@ public abstract class Gate : MonoBehaviour
     {
         output = value;
         OutputChanged?.Invoke();
+        foreach (var wires in outputWires)
+        {
+            wires.UpdateState(output);
+        }
     }
 
     public virtual void OnInputChanged()
     {
         output = Execute();
         OutputChanged?.Invoke();
+        foreach (var wires in outputWires)
+        {
+            wires.UpdateState(output);
+        }
     }
     
     protected abstract bool Execute();

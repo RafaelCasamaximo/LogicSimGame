@@ -8,14 +8,18 @@ using UnityEngine.Tilemaps;
 public enum LogicGate
 {
     Generator = 0,
-    AND = 1,
-    NAND = 2,
-    OR = 3,
-    NOR = 4,
-    XOR = 5,
-    XNOR = 6,
-    NOT = 7,
-    Reader = 8
+    GeneratorRed = 1,
+    GeneratorBlue = 2,
+    AND = 3,
+    NAND = 4,
+    OR = 5,
+    NOR = 6,
+    XOR = 7,
+    XNOR = 8,
+    NOT = 9,
+    Reader = 10,
+    ReaderRed = 11,
+    ReaderBlue = 12,
 }
 
 /// <summary>
@@ -61,6 +65,15 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
         or.Initialize(new Vector3Int(10, 7));
         or.AddInput(and);
         or.AddInput(g3);
+        //Cria uma NOT
+        var not = gameObject.AddComponent<NOTGate>();
+        not.Initialize(new Vector3Int(6, 4));
+        not.AddInput(g3);
+        //Cria uma XNOR
+        var xnor = gameObject.AddComponent<XNORGate>();
+        xnor.Initialize(new Vector3Int(10, 4));
+        xnor.AddInput(and);
+        xnor.AddInput(not);
         // Salva no leitor o resultado da AND
         var r1 = gameObject.AddComponent<ReaderGate>();
         r1.Initialize(new Vector3Int(14, 10));
@@ -69,14 +82,23 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
         var r2 = gameObject.AddComponent<ReaderGate>();
         r2.Initialize(new Vector3Int(14, 7));
         r2.AddInput(or);
-        // Imprime Resultados
-        Debug.Log("Saida TRUE [AND] FALSE: " + r1.GetOutput());
-        Debug.Log("Saida (TRUE [AND] FALSE) [OR] TRUE: " + r2.GetOutput());
-        // Altera o valor e faz a propagation
-        g3.SetValue(false);
-        Debug.Log("Saida TRUE [AND] FALSE: " + r1.GetOutput());
-        Debug.Log("Saida (TRUE [AND] FALSE) [OR] FALSE: " + r2.GetOutput());
-        
+        // Salva no leitor o resultado entre o NOT R3 e o AND de G1 e G2
+        var r3 = gameObject.AddComponent<ReaderGate>();
+        r3.Initialize(new Vector3Int(14, 4));
+        r3.AddInput(xnor);
+
+        StartCoroutine(ChangeGenerator(g1, g2, g3));
+    }
+    
+    IEnumerator ChangeGenerator(GeneratorGate g1, GeneratorGate g2, GeneratorGate g3)
+    {
+        yield return new WaitForSeconds(1);
+        g1.SetValue(!g1.GetOutput());
+        yield return new WaitForSeconds(1);
+        g2.SetValue(!g2.GetOutput());
+        yield return new WaitForSeconds(1);
+        g3.SetValue(!g3.GetOutput());
+        StartCoroutine(ChangeGenerator(g1, g2, g3));
 
     }
 }

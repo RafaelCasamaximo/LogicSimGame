@@ -6,7 +6,7 @@ TextureImporter:
   serializedVersion: 12
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -33,27 +33,27 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 200
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -115,18 +115,580 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: AND
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 600
+        width: 600
+        height: 600
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 919eca90ed138f845aea3cf4eaa94129
+      internalID: 1562846364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OR
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 600
+        height: 600
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93f86141a758c1a478d0c880bd2f8137
+      internalID: -1812359585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NAND
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 600
+        width: 600
+        height: 600
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7de2351549878f4ca0a00dd7961ad60
+      internalID: -1733947924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: XNOR
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 600
+        height: 600
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b9c723d0e768954eaacb4dfcbc36b69
+      internalID: -529578022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NOR
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 600
+        width: 600
+        height: 600
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ca3dba22e5318f4cb542566e9afb7c1
+      internalID: 619323786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: XOR
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 0
+        width: 600
+        height: 600
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae3bcb18cf0007545ac6b24b99a8ab79
+      internalID: 645802974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CURSOR_YELLOW_3x
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 600
+        width: 600
+        height: 600
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b492ae5d9e00c24b82ba5c9a4061870
+      internalID: 1851603862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CURSOR_BLUE_3x
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 2
+        width: 600
+        height: 600
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1c5bde7681e3ee44a8003d901548f5f
+      internalID: 2081244577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CURSOR_RED_3x
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 0
+        width: 600
+        height: 600
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b8c1ee0950b44f45858b42ab919c75e
+      internalID: 783577198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CURSOR_GRAY_3x
+      rect:
+        serializedVersion: 2
+        x: 3000
+        y: 0
+        width: 600
+        height: 600
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03884a516b168af459b77baba5b2ec16
+      internalID: -378083835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GENERATOR
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 1000
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78305d4a8ea618b45967d3ed5ab5f403
+      internalID: 1359553471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GENERATOR_RED
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 1000
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3472f656443e5704b8e58b991846ad86
+      internalID: -1562147747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GENERATOR_BLUE
+      rect:
+        serializedVersion: 2
+        x: 2800
+        y: 1000
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c64a8641a2c291243adcf5b6894f6457
+      internalID: 127260097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BACKGROUND
+      rect:
+        serializedVersion: 2
+        x: 3000
+        y: 1000
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d97af7037f4ce245b18d13f5647a3ff
+      internalID: -1209863421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NOT
+      rect:
+        serializedVersion: 2
+        x: 3200
+        y: 1000
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c460688de58d334daf2ee3e301e657e
+      internalID: -2006774498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: READER
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 800
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f4888c8f9de97548bcbdba4f3c23b3c
+      internalID: -2091594627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: READER_RED
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 800
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92d764fb048c73844a888f3afece198a
+      internalID: 1885292830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: READER_BLUE
+      rect:
+        serializedVersion: 2
+        x: 2800
+        y: 800
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e32a8ebde95577848aa3a043ebdd03df
+      internalID: -141223026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CURSOR_YELLOW
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 600
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59da433b9f4aeec45b98e1750c6cc3e3
+      internalID: 1311735065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CURSOR_BLUE
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 600
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72b218e172598a845b474eb7eb8e0083
+      internalID: 337137275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CURSOR_RED
+      rect:
+        serializedVersion: 2
+        x: 2800
+        y: 600
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0869283d73c1c5149a8556012b5f9341
+      internalID: 2066510664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CURSOR_GRAY
+      rect:
+        serializedVersion: 2
+        x: 3000
+        y: 600
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b693d8d0f6d371646923f681fb0c1639
+      internalID: 1585424801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 50d600414b3a74443b54a4c697c2127f
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      AND: 1562846364
+      BACKGROUND: -1209863421
+      CURSOR_BLUE: 337137275
+      CURSOR_BLUE_3x: 2081244577
+      CURSOR_GRAY: 1585424801
+      CURSOR_GRAY_3x: -378083835
+      CURSOR_RED: 2066510664
+      CURSOR_RED_3x: 783577198
+      CURSOR_YELLOW: 1311735065
+      CURSOR_YELLOW_3x: 1851603862
+      GENERATOR: 1359553471
+      GENERATOR_BLUE: 127260097
+      GENERATOR_RED: -1562147747
+      LogicGates_10: -815538265
+      LogicGates_11: -1512968511
+      LogicGates_17: -1702099267
+      LogicGates_18: -1871325356
+      LogicGates_19: 71450364
+      LogicGates_20: 240198733
+      LogicGates_21: 914410708
+      LogicGates_22: -966938582
+      LogicGates_23: 1178725348
+      LogicGates_24: -2010214796
+      LogicGates_25: 168899888
+      LogicGates_26: 930865466
+      LogicGates_27: 202680350
+      LogicGates_31: -474338423
+      LogicGates_32: 1755143203
+      LogicGates_33: 1231584838
+      LogicGates_34: 1148303798
+      LogicGates_35: 1376368447
+      LogicGates_36: 975850270
+      LogicGates_37: 374866986
+      LogicGates_38: 245435294
+      LogicGates_39: -2096576465
+      LogicGates_40: 129247451
+      LogicGates_41: -1028542033
+      LogicGates_42: -776142458
+      LogicGates_43: 1875582727
+      LogicGates_44: 1367606673
+      LogicGates_49: 881899203
+      LogicGates_50: -88795045
+      LogicGates_51: -345510966
+      LogicGates_52: 854362594
+      LogicGates_53: -1967010439
+      LogicGates_54: 707868088
+      LogicGates_55: 2109626679
+      LogicGates_56: 1704752891
+      LogicGates_57: -1083653115
+      LogicGates_58: 1859414113
+      LogicGates_59: -1272376521
+      LogicGates_60: 438070444
+      LogicGates_61: 1869645864
+      LogicGates_62: -1646780457
+      LogicGates_63: -1338473357
+      LogicGates_64: -1689538645
+      LogicGates_65: 1060522064
+      LogicGates_66: -801877738
+      LogicGates_67: -1304236970
+      LogicGates_68: -1567561839
+      LogicGates_69: -1802453229
+      LogicGates_70: 756373384
+      LogicGates_71: -540793849
+      LogicGates_72: -787007513
+      LogicGates_73: -467210494
+      LogicGates_74: 1417264386
+      LogicGates_75: -1142226648
+      LogicGates_76: 896949602
+      LogicGates_77: 1892764649
+      LogicGates_78: -1232425265
+      LogicGates_79: -1418532955
+      LogicGates_80: -46698094
+      LogicGates_81: 1237801096
+      LogicGates_82: 1284189256
+      LogicGates_83: -1688366230
+      LogicGates_84: -181894217
+      LogicGates_85: -1350077289
+      LogicGates_86: 1093744316
+      LogicGates_87: 1676997192
+      LogicGates_88: 735626052
+      LogicGates_89: -966806249
+      LogicGates_90: -891032920
+      LogicGates_91: 746126810
+      LogicGates_92: -1856955400
+      LogicGates_93: -673869594
+      LogicGates_94: 2121391391
+      LogicGates_95: 2096814500
+      LogicGates_96: -521186162
+      LogicGates_97: 1010139039
+      LogicGates_98: -1033745271
+      LogicGates_99: 1779244635
+      NAND: -1733947924
+      NOR: 619323786
+      NOT: -2006774498
+      OR: -1812359585
+      READER: -2091594627
+      READER_BLUE: -141223026
+      READER_RED: 1885292830
+      XNOR: -529578022
+      XOR: 645802974
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

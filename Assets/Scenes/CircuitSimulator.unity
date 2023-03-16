@@ -339,8 +339,8 @@ MonoBehaviour:
   backgroundTilemap: {fileID: 1142861119}
   logicGatesTileMap: {fileID: 933556081}
   cursorTilemap: {fileID: 475642528}
-  backgroundTileBase: {fileID: 11400000, guid: faec3c6db2c9c9b4fa87ee554ff7ef40, type: 2}
-  cursorTileBase: {fileID: 11400000, guid: c3016c1553f0f194d9b75d5446f08d8f, type: 2}
+  backgroundTileBase: {fileID: 11400000, guid: 9e2b29cd574529d4480a44e2fd1640f9, type: 2}
+  cursorTileBase: {fileID: 11400000, guid: 073836e3b8cd41b4c86e599a0d4ac67f, type: 2}
   cursorLastPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &538501739
 MonoBehaviour:
@@ -358,15 +358,19 @@ MonoBehaviour:
   backgroundWidth: 20
   backgroundHeight: 15
   logicGatesTiles:
-  - {fileID: 11400000, guid: 82b02b6d555b14a4d9202a4d540dff7c, type: 2}
-  - {fileID: 11400000, guid: b0b3090a50a874d41aa82f6fcd9f7e58, type: 2}
-  - {fileID: 11400000, guid: 0d6ff379039d74b42a8371926e57863f, type: 2}
-  - {fileID: 11400000, guid: 154818b32dff6d0469bf8cbb75eaf35a, type: 2}
-  - {fileID: 11400000, guid: d2e4728b763871b41ba815f232112c8f, type: 2}
-  - {fileID: 11400000, guid: 357946b2607b2ae4f8b2d135675a2ac8, type: 2}
-  - {fileID: 11400000, guid: cd73739be540af046828a8ba7f90c8ca, type: 2}
-  - {fileID: 11400000, guid: b7a78bb1de9f6974695b50ae7d5d2e9f, type: 2}
-  - {fileID: 11400000, guid: 82b02b6d555b14a4d9202a4d540dff7c, type: 2}
+  - {fileID: 11400000, guid: 08e0d88519c0e3549b7ac0fffb94fde5, type: 2}
+  - {fileID: 11400000, guid: 87ef34f65365b134c9ec7edcc771a20e, type: 2}
+  - {fileID: 11400000, guid: e256a56f655146b4dbe6656abcbae40d, type: 2}
+  - {fileID: 11400000, guid: 5a5896fe61f5287458cfbea5ec080cbf, type: 2}
+  - {fileID: 11400000, guid: 940053506a80d7f42935d45b752efdd0, type: 2}
+  - {fileID: 11400000, guid: 3ca4bdcb474c88a45abdb7a3f9f6e170, type: 2}
+  - {fileID: 11400000, guid: c46b996ef32246d4698021914e50d430, type: 2}
+  - {fileID: 11400000, guid: eea9aad1d857d274583ac559e40466a4, type: 2}
+  - {fileID: 11400000, guid: d1df10d1b947e114a8d8771dafe01474, type: 2}
+  - {fileID: 11400000, guid: 676cce371f39afe4da10a3a01d50a8fd, type: 2}
+  - {fileID: 11400000, guid: bdad3a0b2e5fa9941b18402c9628241e, type: 2}
+  - {fileID: 11400000, guid: 924a37b7cd093cb4a95c45efe0728226, type: 2}
+  - {fileID: 11400000, guid: 0f685869e30ef5a4b99ba16cb20c6857, type: 2}
   circuitSimulatorRenderer: {fileID: 0}
 --- !u!1 &933556078
 GameObject:

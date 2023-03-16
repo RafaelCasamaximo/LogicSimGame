@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class ColorPalette
 {
-    public static Color activatedWire = new Color(0.42f,0.7f,0.78f, 1);
-    public static Color deactivatedWire = new Color(82,82,82,255);
+    public static Color activatedWire = new Color(0.03f,0.85f,0.84f, 1);
+    public static Color deactivatedWire = new Color(1f,0.18f,0.39f,1);
 
 }
