@@ -45,6 +45,14 @@ public class WireRenderer : MonoBehaviour
         wire.SetPosition(3, endPoint);
     }
 
+    public void UpdateWire(Vector2Int start, Vector2Int end)
+    {
+        wire.SetPosition(0, startPoint);
+        wire.SetPosition(1, new Vector3(startPoint.x + 0.7f, startPoint.y, startPoint.z));
+        wire.SetPosition(2, new Vector3(endPoint.x + -0.7f, endPoint.y, endPoint.z));
+        wire.SetPosition(3, endPoint);
+    }
+
     public void UpdateState(bool newState)
     {
         state = newState;
@@ -58,5 +66,17 @@ public class WireRenderer : MonoBehaviour
             wire.startColor = ColorPalette.deactivatedWire;
             wire.endColor = ColorPalette.deactivatedWire;
         }
+    }
+
+    public void RemoveLineRenderer()
+    {
+        Destroy(wire);
+    }
+
+    public bool CompareEndPoint(Vector2Int point)
+    {
+        Vector3 newPoint = CircuitSimulatorManager.Instance.grid.GetCellCenterWorld(new Vector3Int(point.x, point.y));
+        newPoint.z = -0.01f;
+        return endPoint == newPoint;
     }
 }

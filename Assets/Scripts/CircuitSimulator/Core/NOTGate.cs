@@ -1,28 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class NOTGate : Gate
 {
-
-    // Override porque o NOTGate precisa funcionar mesmo com um único input.
-    public override void AddInput(Gate gate)
-    {
-        inputs.Add(gate);
-        gate.OutputChanged += OnInputChanged;
-        WireRenderer wire = gameObject.AddComponent<WireRenderer>();
-        wire.Initialize(gate.outputLocation, inputLocations[inputs.Count - 1], gate.GetOutput());
-        gate.outputWires.Add(wire);
-        OnInputChanged();
-    }
-
     protected override bool Execute()
     {
-        return !inputs[0].GetOutput();
+        bool input0 = inputs.ElementAtOrDefault(0) != null && inputs[0].GetOutput();
+        return !input0;
     }
     
     public override void Initialize(Vector3Int gridPosition)
     {
+        outputs = new List<Gate>();
         outputWires = new List<WireRenderer>();
         size = new Vector2Int(1, 1);
         position = gridPosition;

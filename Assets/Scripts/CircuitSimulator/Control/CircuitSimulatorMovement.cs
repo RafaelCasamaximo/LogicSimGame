@@ -35,8 +35,6 @@ public class CircuitSimulatorMovement : MonoBehaviour
             cursorCurrentPosition += new Vector3Int((int)cursorMovement.x, (int)cursorMovement.y);
             CircuitSimulatorManager.Instance.circuitSimulatorRenderer.ChangeCursorPosition(cursorCurrentPosition);
         }
-
-        frameCounter %= speedInterval;
     }
     
     /*
@@ -45,7 +43,6 @@ public class CircuitSimulatorMovement : MonoBehaviour
      */
     public void HandleCircuitSimulatorMovementMove(InputAction.CallbackContext context)
     {
-        frameCounter = 0;
         if (context.canceled)
         {
             cursorMovement = Vector2.zero;

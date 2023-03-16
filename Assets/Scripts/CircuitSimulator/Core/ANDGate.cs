@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ANDGate : Gate
@@ -8,11 +9,14 @@ public class ANDGate : Gate
     
     protected override bool Execute()
     {
-        return inputs[0].GetOutput() && inputs[1].GetOutput();
+        bool input0 = inputs.ElementAtOrDefault(0) != null && inputs[0].GetOutput();
+        bool input1 = inputs.ElementAtOrDefault(1) != null && inputs[1].GetOutput();
+        return input0 && input1;
     }
     
     public override void Initialize(Vector3Int gridPosition)
     {
+        outputs = new List<Gate>();
         outputWires = new List<WireRenderer>();
         size = new Vector2Int(3, 3);
         position = gridPosition;

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -11,6 +12,8 @@ public abstract class Gate : MonoBehaviour
     /// gate logic. Not the graphic logic
     /// </summary>
     public List<Gate> inputs = new List<Gate>();
+
+    public List<Gate> outputs = new List<Gate>();
     public event Action OutputChanged;
     protected bool output;
 
@@ -29,18 +32,12 @@ public abstract class Gate : MonoBehaviour
     public virtual void AddInput(Gate gate)
     {
         inputs.Add(gate);
+        gate.outputs.Add(this);
         gate.OutputChanged += OnInputChanged;
         WireRenderer wire = gameObject.AddComponent<WireRenderer>();
         wire.Initialize(gate.outputLocation, inputLocations[inputs.Count - 1], gate.GetOutput());
         gate.outputWires.Add(wire);
-
-        // Essa verificação existe para que o método não tente ser acionado logo após a inserção do 1o input.
-        // Ele é virtual pois o NOT precisa que ele execute somente com 1 input. Logo, ele é overrided.
-        if (inputs.Count > 1)
-        {
-            OnInputChanged();
-        }
-        
+        OnInputChanged();
     }
     
     public virtual void SetInput(int index, Gate gate)
@@ -82,6 +79,45 @@ public abstract class Gate : MonoBehaviour
         {
             wires.UpdateState(output);
         }
+    }
+
+    public virtual void Delete()
+    {
+        // Definir o tile como null (deletar o tile)
+        CircuitSimulatorManager.Instance.circuitSimulatorRenderer.logicGatesTileMap.SetTile(position, null);
+        
+        // Iterar todos os gates que eu era input e verificar se eu estava conectado na primeira entrada
+        // Se eu estava na primeira entrada, então preciso verificar se existe algo na segunda e definir essa entrada como a primeira
+        // E também preciso atualizar o fio
+
+        // Iterar por todos os fios que conecta em algo e deletar o line renderer deles
+        foreach (var wire in outputWires.ToList())
+        {
+            wire.RemoveLineRenderer();
+            outputWires.Remove(wire);
+        }
+        // Procurar por fios que terminam no mesmo lugar dos seus inputs
+        foreach (var gate in inputs)
+        {
+            foreach (var wire in gate.outputWires.ToList())
+            {
+                // Deleta o fio de qualquer input que termina na mesma posição onde fica uma entrada desse gate
+                if (wire.CompareEndPoint(inputLocations[0]) || wire.CompareEndPoint(inputLocations[1]))
+                {
+                    wire.RemoveLineRenderer();
+                    gate.outputWires.Remove(wire);
+                }
+            }
+        }
+        
+        // // Iterar sobre todos os gates que eu era input e atualizar a entrada deles
+        // foreach (var output in outputs)
+        // {
+        //
+        // }
+        //
+
+        
     }
     
     protected abstract bool Execute();

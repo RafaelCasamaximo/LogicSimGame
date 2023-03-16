@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -12,6 +13,7 @@ public class ReaderGate : Gate
     public override void AddInput(Gate gate)
     {
         inputs.Add(gate);
+        gate.outputs.Add(this);
         gate.OutputChanged += OnInputChanged;
         gate.OutputChanged += UpdateState;
         WireRenderer wire = gameObject.AddComponent<WireRenderer>();
@@ -36,11 +38,13 @@ public class ReaderGate : Gate
 
     protected override bool Execute()
     {
-        return inputs[0].GetOutput();
+        bool input0 = inputs.ElementAtOrDefault(0) != null && inputs[0].GetOutput();
+        return input0;
     }
     
     public override void Initialize(Vector3Int gridPosition)
     {
+        outputs = new List<Gate>();
         position = gridPosition;
         outputWires = new List<WireRenderer>();
         size = new Vector2Int(0 + position.x, 0 + position.y);

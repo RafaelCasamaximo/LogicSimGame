@@ -38,6 +38,7 @@ public class GeneratorGate : Gate
     
     public override void Initialize(Vector3Int gridPosition)
     {
+        outputs = new List<Gate>();
         position = gridPosition;
         outputWires = new List<WireRenderer>();
         size = new Vector2Int(0 + position.x, 0 + position.y);
