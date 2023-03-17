@@ -11,30 +11,31 @@ public class CircuitSimulatorMovement : MonoBehaviour
     private Vector3Int cursorStartPosition;
     private Vector3Int cursorCurrentPosition;
     private Vector2 cursorMovement;
-    public int speedInterval;
-    private int frameCounter;
-    
+    public Vector3 origPos;
+    public Vector3 targetPos;
+    public float timeToMove;
+
+    public bool isMoving;
     // Start is called before the first frame update
     void Start()
     {
-        frameCounter = 0;
-        backgroundWidth = CircuitSimulatorManager.Instance.backgroundWidth;
-        backgroundHeight = CircuitSimulatorManager.Instance.backgroundHeight;
-        cursorStartPosition = new Vector3Int(backgroundWidth /2, backgroundHeight /2);
-        cursorCurrentPosition = cursorStartPosition;
-        CircuitSimulatorManager.Instance.circuitSimulatorRenderer.cursorLastPosition = cursorStartPosition;
-        CircuitSimulatorManager.Instance.circuitSimulatorRenderer.ChangeCursorPosition(cursorStartPosition);
+        // frameCounter = 0;
+        // backgroundWidth = CircuitSimulatorManager.Instance.backgroundWidth;
+        // backgroundHeight = CircuitSimulatorManager.Instance.backgroundHeight;
+        // cursorStartPosition = new Vector3Int(backgroundWidth /2, backgroundHeight /2);
+        // cursorCurrentPosition = cursorStartPosition;
+        // CircuitSimulatorManager.Instance.circuitSimulatorRenderer.cursorLastPosition = cursorStartPosition;
+        // CircuitSimulatorManager.Instance.circuitSimulatorRenderer.ChangeCursorPosition(cursorStartPosition);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if (cursorMovement != Vector2.zero && frameCounter == 0)
+        if (cursorMovement != Vector2.zero && !isMoving)
         {
-            cursorCurrentPosition += new Vector3Int((int)cursorMovement.x, (int)cursorMovement.y);
-            CircuitSimulatorManager.Instance.circuitSimulatorRenderer.ChangeCursorPosition(cursorCurrentPosition);
+            StartCoroutine(MoveCursor(cursorMovement));
         }
+            
     }
     
     /*
@@ -51,5 +52,28 @@ public class CircuitSimulatorMovement : MonoBehaviour
         if (!context.performed) return;
         cursorMovement = context.ReadValue<Vector2>();
     }
+
+    public IEnumerator MoveCursor(Vector3 direction)
+    {
+        isMoving = true;
+
+        float elapsedTime = 0f;
+
+        origPos = transform.position;
+        targetPos = origPos + direction;
+
+        while (elapsedTime < timeToMove)
+        {
+            transform.position = Vector3.Lerp(origPos, targetPos, (elapsedTime / timeToMove));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        Vector3Int cellPosition = CircuitSimulatorManager.Instance.grid.WorldToCell(transform.position);
+        transform.position = CircuitSimulatorManager.Instance.grid.GetCellCenterWorld(cellPosition);
+
+        isMoving = false;
+    }
+    
     
 }

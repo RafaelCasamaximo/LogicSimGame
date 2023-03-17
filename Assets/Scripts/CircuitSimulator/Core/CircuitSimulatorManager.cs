@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -100,20 +101,33 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
         r3.Initialize(new Vector3Int(14, 4));
         r3.AddInput(xnor);
 
-        and.Delete();
-        
-        // StartCoroutine(ChangeGenerator(g1, g2, g3));
-        
+        StartCoroutine(ChangeGenerator(g1, g2, g3));
+    }
 
+    // Itera sobre a lista de Gates que foram inseridas pelo o jogador e deleta todos
+    // Deleta os fios também. É um soft reset da cena.
+    public void DeleteAllGates()
+    {
+        foreach (var gate in gates.ToList())
+        {
+            foreach (var wire in gate.outputWires.ToList())
+            {
+                wire.RemoveLineRenderer();
+                Destroy(wire);
+            }
+            Destroy(gate);
+        }
+        circuitSimulatorRenderer.logicGatesTileMap.ClearAllTiles();
     }
     
+    // Função de teste e vai ser deletada depois
     IEnumerator ChangeGenerator(GeneratorGate g1, GeneratorGate g2, GeneratorGate g3)
     {
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.2f);
         g1.SetValue(!g1.GetOutput());
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.2f);
         g2.SetValue(!g2.GetOutput());
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.2f);
         g3.SetValue(!g3.GetOutput());
         StartCoroutine(ChangeGenerator(g1, g2, g3));
 
