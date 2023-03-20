@@ -155,6 +155,7 @@ public class GameManager : Singleton<GameManager>
     {
         GameManagerUtilities.LockMouse();
         GUIManager.Instance.HideAll();
+        GUIManager.Instance.Show("CircuitSimulatorPersistentGUI");
         ChangeState(GameState.CircuitSimulatorMoving);
     }
 
