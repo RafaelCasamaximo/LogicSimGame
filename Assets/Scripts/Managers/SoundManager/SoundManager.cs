@@ -15,7 +15,7 @@ public class SoundManager : SingletonPersistent<SoundManager>
         if (clip == null) return;
         effectsSource.PlayOneShot(clip);
     }
-
+    
     public void ChangeMasterVolume(float value)
     {
         AudioListener.volume = value;

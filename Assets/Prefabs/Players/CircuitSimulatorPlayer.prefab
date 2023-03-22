@@ -202,35 +202,11 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 232537820502236589}
-        m_TargetAssemblyTypeName: CircuitSimulatorFreeCamera, Assembly-CSharp
-        m_MethodName: HandleCircuitSimulatorFreeCameraMove
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 84c926bd-bb35-40f0-bf60-9000e0d02125
     m_ActionName: Movement/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/XInputControllerWindows/leftStick/up,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/leftStick/right]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 232537820502236589}
-        m_TargetAssemblyTypeName: CircuitSimulatorFreeCamera, Assembly-CSharp
-        m_MethodName: HandleCircuitSimulatorFreeCameraZoom
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: d61d6470-fb7c-47c3-96ac-1d47ef83ac45
     m_ActionName: Movement/Zoom[/XInputControllerWindows/rightTrigger,/XInputControllerWindows/leftTrigger,/Mouse/scroll/up,/Mouse/scroll/down]
   - m_PersistentCalls:
@@ -249,6 +225,86 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 5d81715a-b7c8-41a8-95b1-92cc6a0c15ea
     m_ActionName: Movement/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5952537926064226695}
+        m_TargetAssemblyTypeName: CircuitSimulatorMovement, Assembly-CSharp
+        m_MethodName: HandleCircuitSimulatorMovementOpenInventory
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 222672b7-0611-43c9-b71f-696b029ef032
+    m_ActionName: Movement/OpenInventory[/XInputControllerWindows/select,/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5952537926064226695}
+        m_TargetAssemblyTypeName: CircuitSimulatorMovement, Assembly-CSharp
+        m_MethodName: HandleCircuitSimulatorMovementExit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 03df5787-1bb2-4db0-ab73-8b7addb3c97e
+    m_ActionName: Movement/Exit[/XInputControllerWindows/buttonWest,/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5952537926064226695}
+        m_TargetAssemblyTypeName: CircuitSimulatorMovement, Assembly-CSharp
+        m_MethodName: HandleCircuitSimulatorMovementCompareOutputs
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 91a5dd3e-fd60-492a-8935-0d59c76b3c13
+    m_ActionName: Movement/CompareOutputs[/XInputControllerWindows/buttonEast,/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5952537926064226695}
+        m_TargetAssemblyTypeName: CircuitSimulatorMovement, Assembly-CSharp
+        m_MethodName: HandleCircuitSimulatorMovementResetCircuit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 01aa2ead-ac6b-4b23-8d6a-3c6bf549c46b
+    m_ActionName: Movement/ResetCircuit[/XInputControllerWindows/buttonNorth,/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7239919061294012183}
+        m_TargetAssemblyTypeName: CircuitSimulatorInventory, Assembly-CSharp
+        m_MethodName: HandleCircuitSimulatorInventoryCloseInventory
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 66908258-da6b-4832-8c2e-3f2b2340efed
+    m_ActionName: Inventory/CloseInventory[/Keyboard/e,/XInputControllerWindows/select]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: FreeCamera
@@ -446,6 +502,7 @@ GameObject:
   - component: {fileID: 5759555540740840305}
   - component: {fileID: 4636883282791520522}
   - component: {fileID: 5952537926064226695}
+  - component: {fileID: 7239919061294012183}
   m_Layer: 0
   m_Name: CURSOR_YELLOW
   m_TagString: Untagged
@@ -535,4 +592,20 @@ MonoBehaviour:
   origPos: {x: 0, y: 0, z: 0}
   targetPos: {x: 0, y: 0, z: 0}
   timeToMove: 0.1
+  movementSounds:
+  - {fileID: 8300000, guid: ef6fde0813b2a1e49ac41616a88750ee, type: 3}
+  - {fileID: 8300000, guid: cc81de1fe2f74d04797001f52895026d, type: 3}
+  - {fileID: 8300000, guid: c7f7741935d89b843812813402a794db, type: 3}
   isMoving: 0
+--- !u!114 &7239919061294012183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7769782832382984177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cdcefa5d0dddb940a64baf94f173da8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -171,6 +171,8 @@ public class GameManager : Singleton<GameManager>
     private void HandleCircuitSimulatorInventory()
     {
         circuitSimulatorPlayerInput.SwitchCurrentActionMap("Inventory");
+        GameManagerUtilities.UnlockMouse();
+        GUIManager.Instance.Show("CircuitSimulatorInventoryGUI");
     }
 
     private void HandleCircuitSimulatorPlacingCircuits()

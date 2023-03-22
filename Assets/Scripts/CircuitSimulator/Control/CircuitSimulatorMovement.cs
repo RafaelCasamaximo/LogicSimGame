@@ -5,15 +5,11 @@ using UnityEngine.InputSystem;
 
 public class CircuitSimulatorMovement : MonoBehaviour
 {
-
-    private int backgroundWidth;
-    private int backgroundHeight;
-    private Vector3Int cursorStartPosition;
-    private Vector3Int cursorCurrentPosition;
     private Vector2 cursorMovement;
     public Vector3 origPos;
     public Vector3 targetPos;
     public float timeToMove;
+    public AudioClip[] movementSounds;
 
     public bool isMoving;
     // Start is called before the first frame update
@@ -26,6 +22,7 @@ public class CircuitSimulatorMovement : MonoBehaviour
         // cursorCurrentPosition = cursorStartPosition;
         // CircuitSimulatorManager.Instance.circuitSimulatorRenderer.cursorLastPosition = cursorStartPosition;
         // CircuitSimulatorManager.Instance.circuitSimulatorRenderer.ChangeCursorPosition(cursorStartPosition);
+        SoundManager.Instance.ChangeEffectsVolume(0.1f);
     }
 
     // Update is called once per frame
@@ -53,9 +50,49 @@ public class CircuitSimulatorMovement : MonoBehaviour
         cursorMovement = context.ReadValue<Vector2>();
     }
 
+    /*
+     * Handlers do Movement InputMap
+     * Convenção de nome: Handle<Nome do Input Action><Nome do Mapping><Nome da Action>
+     */
+    public void HandleCircuitSimulatorMovementOpenInventory(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        GameManager.Instance.ChangeState(GameState.CircuitSimulatorInventory);
+    }
+    
+    /*
+     * Handlers do Movement InputMap
+     * Convenção de nome: Handle<Nome do Input Action><Nome do Mapping><Nome da Action>
+     */
+    public void HandleCircuitSimulatorMovementExit(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+    }
+    
+    /*
+     * Handlers do Movement InputMap
+     * Convenção de nome: Handle<Nome do Input Action><Nome do Mapping><Nome da Action>
+     */
+    public void HandleCircuitSimulatorMovementCompareOutputs(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        GameManager.Instance.ChangeState(GameState.CircuitSimulatorComparingOutput);
+    }
+    
+    /*
+     * Handlers do Movement InputMap
+     * Convenção de nome: Handle<Nome do Input Action><Nome do Mapping><Nome da Action>
+     */
+    public void HandleCircuitSimulatorMovementResetCircuit(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+    }
+    
+    
     public IEnumerator MoveCursor(Vector3 direction)
     {
         isMoving = true;
+        SoundManager.Instance.PlaySound(movementSounds[Random.Range(0, movementSounds.Length - 1)]);
 
         float elapsedTime = 0f;
 
@@ -74,6 +111,5 @@ public class CircuitSimulatorMovement : MonoBehaviour
 
         isMoving = false;
     }
-    
     
 }
