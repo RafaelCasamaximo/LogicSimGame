@@ -188,6 +188,9 @@ public class GameManager : Singleton<GameManager>
     private void HandleCircuitSimulatorComparingOutput()
     {
         circuitSimulatorPlayerInput.SwitchCurrentActionMap("ComparingOutput");
+        GameManagerUtilities.UnlockMouse();
+        // TODO: Abrir interface do Comparing Outputs aqui
+        // GUIManager.Instance.Show("CircuitSimulatorInventoryGUI");
     }
 
 

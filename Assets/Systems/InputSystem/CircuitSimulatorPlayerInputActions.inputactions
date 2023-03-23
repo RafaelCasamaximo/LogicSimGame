@@ -552,8 +552,41 @@
         {
             "name": "ComparingOutput",
             "id": "05e9233d-6aa4-4f03-895b-f067c926cac3",
-            "actions": [],
-            "bindings": []
+            "actions": [
+                {
+                    "name": "CloseComparingOutputs",
+                    "type": "Button",
+                    "id": "aa1f59ae-0794-46d4-8f82-076139bac225",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5c04ff26-d2d9-4164-a294-f8eb941e2222",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseComparingOutputs",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a4a944f4-7649-4b65-b783-28506b46bf06",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseComparingOutputs",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

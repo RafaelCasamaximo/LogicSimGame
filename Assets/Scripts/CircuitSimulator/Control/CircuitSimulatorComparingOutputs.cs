@@ -1,18 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CircuitSimulatorComparingOutputs : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void HandleCircuitSimulatorComparingOutputsCloseComparingOutputs(InputAction.CallbackContext context)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (!context.performed) return;
+        GameManager.Instance.ChangeState(GameState.CircuitSimulator);
+        // TODO: Fazer fechar a interface do Comparing Outputs aqui
+        // GUIManager.Instance.Hide("CircuitSimulatorInventoryGUI");
     }
 }

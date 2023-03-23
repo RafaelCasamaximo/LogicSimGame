@@ -305,6 +305,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 66908258-da6b-4832-8c2e-3f2b2340efed
     m_ActionName: Inventory/CloseInventory[/Keyboard/e,/XInputControllerWindows/select]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 999689129367986993}
+        m_TargetAssemblyTypeName: CircuitSimulatorComparingOutputs, Assembly-CSharp
+        m_MethodName: HandleCircuitSimulatorComparingOutputsCloseComparingOutputs
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: aa1f59ae-0794-46d4-8f82-076139bac225
+    m_ActionName: ComparingOutput/CloseComparingOutputs[/Keyboard/c,/XInputControllerWindows/buttonEast]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: FreeCamera
@@ -503,6 +519,7 @@ GameObject:
   - component: {fileID: 4636883282791520522}
   - component: {fileID: 5952537926064226695}
   - component: {fileID: 7239919061294012183}
+  - component: {fileID: 999689129367986993}
   m_Layer: 0
   m_Name: CURSOR_YELLOW
   m_TagString: Untagged
@@ -607,5 +624,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3cdcefa5d0dddb940a64baf94f173da8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &999689129367986993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7769782832382984177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d694ba1ffe1f4814698e506bdc66713d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
