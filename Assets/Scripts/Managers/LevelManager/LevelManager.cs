@@ -35,6 +35,7 @@ public class LevelManager : SingletonPersistent<LevelManager>
             continue;
         } while (scene.progress < 0.9f);
         GUIManager.Instance.HideAll();
+        GUIManager.Instance.UnregisterAll();
         scene.allowSceneActivation = true;
         GameManager.Instance.ChangeState(nextGameState);
     }

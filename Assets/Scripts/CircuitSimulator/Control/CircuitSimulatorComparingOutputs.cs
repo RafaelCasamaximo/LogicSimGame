@@ -9,6 +9,7 @@ public class CircuitSimulatorComparingOutputs : MonoBehaviour
     {
         if (!context.performed) return;
         GameManager.Instance.ChangeState(GameState.CircuitSimulator);
+        CircuitSimulatorManager.Instance.circuitSimulatorPlayerInput.SwitchCurrentActionMap("Movement");
         // TODO: Fazer fechar a interface do Comparing Outputs aqui
         // GUIManager.Instance.Hide("CircuitSimulatorInventoryGUI");
     }

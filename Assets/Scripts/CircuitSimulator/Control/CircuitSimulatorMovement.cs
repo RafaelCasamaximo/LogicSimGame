@@ -58,6 +58,7 @@ public class CircuitSimulatorMovement : MonoBehaviour
     {
         if (!context.performed) return;
         GameManager.Instance.ChangeState(GameState.CircuitSimulatorInventory);
+        CircuitSimulatorManager.Instance.circuitSimulatorPlayerInput.SwitchCurrentActionMap("Inventory");
     }
     
     /*

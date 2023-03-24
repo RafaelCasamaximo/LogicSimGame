@@ -52,5 +52,6 @@ public class GridElement : MonoBehaviour
     {
         InventorySystem.Instance.SelectItem(inventoryItem);
         GameManager.Instance.ChangeState(GameState.FreeGameplay);
+        InventorySystem.Instance.playerInput.SwitchCurrentActionMap("Movement");
     }
 }

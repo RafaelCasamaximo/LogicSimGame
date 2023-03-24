@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// Sistema responsável por adicionar, remover, selecionar itens, e retornar valores referentes salvos dos itens que o jogador possui.
 /// </summary>
 public class InventorySystem : SingletonPersistent<InventorySystem>
 {
+    public PlayerInput playerInput;
     private Dictionary<InventoryItemData, InventoryItem> _itemDict;
     public List<InventoryItem> inventory { get; private set; }
     public int maxInventoryItems = 28;

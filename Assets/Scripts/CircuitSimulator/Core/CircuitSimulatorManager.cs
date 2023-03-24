@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 
 [Serializable]
@@ -29,6 +30,7 @@ public enum LogicGate
 /// </summary>
 public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
 {
+    public PlayerInput circuitSimulatorPlayerInput;
     public Grid grid;
     public int backgroundWidth;
     public int backgroundHeight;
@@ -102,6 +104,9 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
         r3.AddInput(xnor);
 
         StartCoroutine(ChangeGenerator(g1, g2, g3));
+        
+        
+        circuitSimulatorPlayerInput.SwitchCurrentActionMap("Movement");
     }
 
     // Itera sobre a lista de Gates que foram inseridas pelo o jogador e deleta todos

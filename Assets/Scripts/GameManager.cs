@@ -42,11 +42,7 @@ public enum GameState
 public class GameManager : Singleton<GameManager>
 {
     public GameState State { get; private set; }
-    public GameObject firstPersonPlayer;
-    public GameObject circuitSimulatorPlayer;
-    [NonSerialized] public PlayerInput playerInput;
-    [NonSerialized] public PlayerInput circuitSimulatorPlayerInput;
-    
+
     private void Start() => ChangeState(GameState.Start);
 
     public void ChangeState(GameState newState)
@@ -110,22 +106,14 @@ public class GameManager : Singleton<GameManager>
         {
             case "TestPlayeground":
                 Debug.Log("Entrando em TestPlayeground");
-                var firstPersonPlayerInstance = Instantiate(firstPersonPlayer);
-                playerInput = firstPersonPlayerInstance.GetComponent<PlayerInput>();
-                DialogueSystem.Instance.playerInput = playerInput;
                 ChangeState(GameState.FreeGameplay);
                 break;
             case "CircuitSimulator":
                 Debug.Log("Entrando em CircuitSimulator");
-                var circuitSimulatorPlayerInstance = Instantiate(circuitSimulatorPlayer);
-                circuitSimulatorPlayerInput = circuitSimulatorPlayerInstance.GetComponent<PlayerInput>();
                 ChangeState(GameState.CircuitSimulator);
                 break;
             case "MainHub":
                 Debug.Log("Entrando em MainHub");
-                var firstPersonPlayerMainHubInstance = Instantiate(firstPersonPlayer);
-                playerInput = firstPersonPlayerMainHubInstance.GetComponent<PlayerInput>();
-                DialogueSystem.Instance.playerInput = playerInput;
                 ChangeState(GameState.FreeGameplay);
                 break;
         }
@@ -136,7 +124,6 @@ public class GameManager : Singleton<GameManager>
         GameManagerUtilities.LockMouse();
         GUIManager.Instance.HideAll();
         GUIManager.Instance.Show("PersistentGUI");
-        playerInput.SwitchCurrentActionMap("Movement");
     }
 
     private void HandleOpenInventory()
@@ -161,33 +148,28 @@ public class GameManager : Singleton<GameManager>
 
     private void HandleCircuitSimulatorFreeCamera()
     {
-        circuitSimulatorPlayerInput.SwitchCurrentActionMap("FreeCamera");
     }
     
     private void HandleCircuitSimulatorMoving()
     {
-        circuitSimulatorPlayerInput.SwitchCurrentActionMap("Movement");
     }
+    
     private void HandleCircuitSimulatorInventory()
     {
-        circuitSimulatorPlayerInput.SwitchCurrentActionMap("Inventory");
         GameManagerUtilities.UnlockMouse();
         GUIManager.Instance.Show("CircuitSimulatorInventoryGUI");
     }
 
     private void HandleCircuitSimulatorPlacingCircuits()
     {
-        circuitSimulatorPlayerInput.SwitchCurrentActionMap("PlacingCircuits");
     }
 
     private void HandleCircuitSimulatorPlacingWires()
     {
-        circuitSimulatorPlayerInput.SwitchCurrentActionMap("PlacingWires");
     }
 
     private void HandleCircuitSimulatorComparingOutput()
     {
-        circuitSimulatorPlayerInput.SwitchCurrentActionMap("ComparingOutput");
         GameManagerUtilities.UnlockMouse();
         // TODO: Abrir interface do Comparing Outputs aqui
         // GUIManager.Instance.Show("CircuitSimulatorInventoryGUI");
