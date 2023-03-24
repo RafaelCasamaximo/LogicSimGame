@@ -45,6 +45,7 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
     public CircuitSimulatorRenderer circuitSimulatorRenderer;
     void Start()
     {
+        
         grid = GetComponent<Grid>();
         circuitSimulatorRenderer = GetComponent<CircuitSimulatorRenderer>();
         circuitSimulatorRenderer.width = backgroundWidth;
@@ -105,8 +106,9 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
 
         StartCoroutine(ChangeGenerator(g1, g2, g3));
         
-        
+        GameManager.Instance.ChangeState(GameState.CircuitSimulatorMoving);
         circuitSimulatorPlayerInput.SwitchCurrentActionMap("Movement");
+        
     }
 
     // Itera sobre a lista de Gates que foram inseridas pelo o jogador e deleta todos

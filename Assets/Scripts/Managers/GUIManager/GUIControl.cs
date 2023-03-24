@@ -10,6 +10,7 @@ using UnityEngine;
 /// Um exemplo de uso pode ser visto aqui:
 /// https://forum.unity.com/threads/managing-state-of-ui.416286/
 /// </summary>
+[DefaultExecutionOrder (-20)]
 public abstract class GUIControl : MonoBehaviour
 {
     public abstract string key { get; }
@@ -17,6 +18,7 @@ public abstract class GUIControl : MonoBehaviour
     protected virtual void Start()
     {
         GUIManager.Instance.Register(this);
+        GUIManager.Instance.Hide(key);
     }
 
     // private void OnDestroy()
