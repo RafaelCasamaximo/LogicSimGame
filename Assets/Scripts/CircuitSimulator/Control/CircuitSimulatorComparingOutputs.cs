@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class CircuitSimulatorComparingOutputs : MonoBehaviour
 {
-    public void HandleCircuitSimulatorComparingOutputsCloseComparingOutputs(InputAction.CallbackContext context)
+    public void HandleCircuitSimulatorComparingOutputCloseComparingOutput(InputAction.CallbackContext context)
     {
         if (!context.performed) return;
         GameManager.Instance.ChangeState(GameState.CircuitSimulator);

@@ -2185,6 +2185,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1002983535}
     m_Modifications:
+    - target: {fileID: 232537820502236588, guid: 7be997d576b390a498d3f1606578791f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2112710167}
+    - target: {fileID: 232537820502236588, guid: 7be997d576b390a498d3f1606578791f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HandleCircuitSimulatorComparingOutputCloseComparingOutput
+      objectReference: {fileID: 0}
+    - target: {fileID: 232537820502236588, guid: 7be997d576b390a498d3f1606578791f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CircuitSimulatorComparingOutputs, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 232537820502236590, guid: 7be997d576b390a498d3f1606578791f, type: 3}
       propertyPath: m_Name
       value: CircuitSimulatorPlayer
@@ -2249,6 +2261,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2112710167 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 999689129367986993, guid: 7be997d576b390a498d3f1606578791f, type: 3}
+  m_PrefabInstance: {fileID: 2112710164}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d694ba1ffe1f4814698e506bdc66713d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2114760644

@@ -108,6 +108,8 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
         
         GameManager.Instance.ChangeState(GameState.CircuitSimulatorMoving);
         circuitSimulatorPlayerInput.SwitchCurrentActionMap("Movement");
+        SoundManager.Instance.PlayMusic(0);
+        SoundManager.Instance.ChangeMusicVolume(0.015f);
         
     }
 

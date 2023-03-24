@@ -9,6 +9,7 @@ public class SoundManager : Singleton<SoundManager>
 {
 
     [SerializeField] private AudioSource musicSource, effectsSource;
+    [SerializeField] private AudioClip[] musicList;
     
     public void PlaySound(AudioClip clip)
     {
@@ -21,6 +22,18 @@ public class SoundManager : Singleton<SoundManager>
         AudioListener.volume = value;
     }
 
+    public void PlayMusic(int index)
+    {
+        musicSource.clip = musicList[index];
+        musicSource.Play();
+        musicSource.loop = true;
+    }
+
+    public void StopMusic()
+    {
+        musicSource.Stop();
+    }
+    
     public void ChangeMusicVolume(float value)
     {
         musicSource.volume = value;

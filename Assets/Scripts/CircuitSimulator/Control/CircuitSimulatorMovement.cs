@@ -78,6 +78,7 @@ public class CircuitSimulatorMovement : MonoBehaviour
     {
         if (!context.performed) return;
         GameManager.Instance.ChangeState(GameState.CircuitSimulatorComparingOutput);
+        CircuitSimulatorManager.Instance.circuitSimulatorPlayerInput.SwitchCurrentActionMap("ComparingOutput");
     }
     
     /*

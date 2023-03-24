@@ -554,7 +554,7 @@
             "id": "05e9233d-6aa4-4f03-895b-f067c926cac3",
             "actions": [
                 {
-                    "name": "CloseComparingOutputs",
+                    "name": "CloseComparingOutput",
                     "type": "Button",
                     "id": "aa1f59ae-0794-46d4-8f82-076139bac225",
                     "expectedControlType": "Button",
@@ -571,7 +571,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "CloseComparingOutputs",
+                    "action": "CloseComparingOutput",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -582,7 +582,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "CloseComparingOutputs",
+                    "action": "CloseComparingOutput",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -29,7 +29,10 @@ public class PlayerHoldItem : MonoBehaviour
         // Fazer item aparecer na mão do player e nao castar shadows
         spawnedItem = Instantiate(InventorySystem.Instance.selectedItem.data.prefab, spawnPositon);
         MeshRenderer spawnedItemMeshRenderer = spawnedItem.GetComponent<MeshRenderer>();
-        spawnedItemMeshRenderer.shadowCastingMode = ShadowCastingMode.Off;
+        if (spawnedItemMeshRenderer != null)
+        {
+            spawnedItemMeshRenderer.shadowCastingMode = ShadowCastingMode.Off;
+        }
         int LayerIgnoreRaycast = LayerMask.NameToLayer("Top Layer");
         spawnedItem.layer = LayerIgnoreRaycast;
     }

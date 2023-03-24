@@ -46359,6 +46359,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSource: {fileID: 1046497719}
   effectsSource: {fileID: 671172977}
+  musicList:
+  - {fileID: 8300000, guid: 63bf9a2158dcf0a4dae91dc3db416325, type: 3}
 --- !u!1 &1518238921
 GameObject:
   m_ObjectHideFlags: 0
