@@ -1,127 +1,195 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Vector2 = UnityEngine.Vector2;
+
+[Serializable]
+public struct Properties
+{
+    [HideInInspector] public Vector3Int gridPosition;
+    public Vector3Int size;
+    public Sprite sprite;
+
+    public Properties(Vector3Int gridPosition, Vector3Int size, Sprite sprite)
+    {
+        this.gridPosition = gridPosition;
+        this.size = size;
+        this.sprite = sprite;
+    }
+}
+
+public struct Input
+{
+    public Vector3Int inputPosition;
+    public Gate connectedGate;
+    public bool state;
+    public bool hasGate;
+
+    public Input(Vector3Int inputPosition, Gate connectedGate, bool state, bool hasGate)
+    {
+        this.inputPosition = inputPosition;
+        this.connectedGate = connectedGate;
+        this.state = state;
+        this.hasGate = hasGate;
+    }
+    
+}
+
+public struct Output
+{
+    public Vector3Int outputPosition;
+    public List<Tuple<Gate, int>> connectedGates;
+    public bool state;
+
+    public Output(Vector3Int outputPosition, List<Tuple<Gate, int>> connectedGates, bool state)
+    {
+        this.outputPosition = outputPosition;
+        this.connectedGates = connectedGates;
+        this.state = state;
+    }
+}
 
 public abstract class Gate : MonoBehaviour
 {
-    /// <summary>
-    /// This variables are responsible for the
-    /// gate logic. Not the graphic logic
-    /// </summary>
-    public List<Gate> inputs = new List<Gate>();
 
-    public List<Gate> outputs = new List<Gate>();
-    public event Action OutputChanged;
-    protected bool output;
-
-    /// <summary>
-    /// This part is Responsible for the
-    /// gate graphics.
-    /// </summary>
-    public Vector3Int position;
-    public TileBase gateTileBase;
-    public Vector2Int size;
-    public List<Vector2Int> inputLocations = new List<Vector2Int>();
-    public Vector2Int outputLocation;
-    public List<WireRenderer> outputWires = new List<WireRenderer>();
+    public Properties properties;
+    public Input input1;
+    public Input input2;
+    public Output output;
+    
+    public event Action InputRemoved;
+    public event Action OutputValueChanged;
 
 
-    public virtual void AddInput(Gate gate)
+    public virtual void Initialize(Vector3Int gridPosition)
     {
-        inputs.Add(gate);
-        gate.outputs.Add(this);
-        gate.OutputChanged += OnInputChanged;
-        WireRenderer wire = gameObject.AddComponent<WireRenderer>();
-        wire.Initialize(gate.outputLocation, inputLocations[inputs.Count - 1], gate.GetOutput());
-        gate.outputWires.Add(wire);
-        OnInputChanged();
+        properties.gridPosition = gridPosition;
+        input1 = new Input(new Vector3Int(gridPosition.x - 1, gridPosition.y + 1), null, false, false);
+        input2 = new Input(new Vector3Int(gridPosition.x - 1, gridPosition.y - 1), null, false, false);
+        output = new Output(new Vector3Int(gridPosition.x + 1, gridPosition.y), new List<Tuple<Gate, int>>(), false);
+
+        transform.position = CircuitSimulatorManager.Instance.circuitSimulatorRenderer.logicGatesTileMap.GetCellCenterWorld(gridPosition);
+
     }
     
-    public virtual void SetInput(int index, Gate gate)
-    {
-        if (index >= 0 && index < inputs.Count) {
-            // OutputChanged -= inputs[index].OnInputChanged;
-            // inputs[index] = gate;
-            // OutputChanged += inputs[index].OnInputChanged;
 
-            inputs[index].OutputChanged -= OnInputChanged;
-            inputs[index] = gate;
-            inputs[index].OutputChanged += OnInputChanged;
+    public virtual void ChangeInput1(Gate gate)
+    {
+        input1.connectedGate = gate;
+        input1.state = gate.output.state;
+        input1.hasGate = true;
+        // TODO: Adicionar um novo wire no output
+        gate.output.connectedGates.Add(new Tuple<Gate, int>(this, 1));
+        gate.OutputValueChanged += OnInputChanged;
+        OnInputChanged();
+    }
+  
+    public virtual void RemoveInput1()
+    {
+        if (input1.hasGate)
+        {
+            // Remove the connection between this gate and the input1 gate
+            input1.connectedGate.output.connectedGates.RemoveAll(tuple => tuple.Item1 == this);
+            input1.connectedGate.OutputValueChanged -= OnInputChanged;
+            
+            // Execute cleanup on the gate that got removed
+            // Mainly for wire removal
+            input1.connectedGate.OnOutputRemoved();
+            
+            // Reset the input1 fields
+            input1.connectedGate = null;
+            input1.state = false;
+            input1.hasGate = false;
+
+            // Trigger the input removed event
+            InputRemoved?.Invoke();
+
+            // Recalculate the output of this gate
             OnInputChanged();
-        } else {
-            throw new IndexOutOfRangeException("Invalid input index");
         }
     }
-
-    public virtual bool GetOutput()
+    
+    public virtual void ChangeInput2(Gate gate)
     {
-        return output;
+        input1.connectedGate = gate;
+        input1.state = gate.output.state;
+        input1.hasGate = true;
+        // TODO: Adicionar um novo wire no output
+        gate.output.connectedGates.Add(new Tuple<Gate, int>(this, 2));
+        gate.OutputValueChanged += OnInputChanged;
+        OnInputChanged();
     }
-
-    public virtual void SetOutput(bool value)
+  
+    public virtual void RemoveInput2()
     {
-        output = value;
-        OutputChanged?.Invoke();
-        foreach (var wires in outputWires)
+        if (input1.hasGate)
         {
-            wires.UpdateState(output);
-        }
-    }
+            // Remove the connection between this gate and the input1 gate
+            input1.connectedGate.output.connectedGates.RemoveAll(tuple => tuple.Item1 == this);
+            input1.connectedGate.OutputValueChanged -= OnInputChanged;
+            
+            // Execute cleanup on the gate that got removed
+            // Mainly for wire removal
+            input1.connectedGate.OnOutputRemoved();
+            
+            // Reset the input1 fields
+            input1.connectedGate = null;
+            input1.state = false;
+            input1.hasGate = false;
 
-    public virtual void OnInputChanged()
-    {
-        output = Execute();
-        OutputChanged?.Invoke();
-        foreach (var wires in outputWires)
-        {
-            wires.UpdateState(output);
+            // Trigger the input removed event
+            InputRemoved?.Invoke();
+
+            // Recalculate the output of this gate
+            OnInputChanged();
         }
     }
 
     public virtual void Delete()
     {
-        // Definir o tile como null (deletar o tile)
-        CircuitSimulatorManager.Instance.circuitSimulatorRenderer.logicGatesTileMap.SetTile(position, null);
+        RemoveInput1();
+        RemoveInput2();
         
-        // Iterar todos os gates que eu era input e verificar se eu estava conectado na primeira entrada
-        // Se eu estava na primeira entrada, então preciso verificar se existe algo na segunda e definir essa entrada como a primeira
-        // E também preciso atualizar o fio
-
-        // Iterar por todos os fios que conecta em algo e deletar o line renderer deles
-        foreach (var wire in outputWires.ToList())
+        // Remove this gate from all the outputs that it is connected to
+        foreach (Tuple<Gate, int> connectedGate in output.connectedGates)
         {
-            wire.RemoveLineRenderer();
-            outputWires.Remove(wire);
-        }
-        // Procurar por fios que terminam no mesmo lugar dos seus inputs
-        foreach (var gate in inputs)
-        {
-            foreach (var wire in gate.outputWires.ToList())
+            if (connectedGate.Item2 == 1)
             {
-                // Deleta o fio de qualquer input que termina na mesma posição onde fica uma entrada desse gate
-                if (wire.CompareEndPoint(inputLocations[0]) || wire.CompareEndPoint(inputLocations[1]))
-                {
-                    wire.RemoveLineRenderer();
-                    gate.outputWires.Remove(wire);
-                }
+                connectedGate.Item1.RemoveInput1();
+            }
+
+            if (connectedGate.Item2 == 1)
+            {
+                connectedGate.Item1.RemoveInput2();
             }
         }
-        
-        // // Iterar sobre todos os gates que eu era input e atualizar a entrada deles
-        // foreach (var output in outputs)
-        // {
-        //
-        // }
-        //
+    }
 
-        
+    public virtual void OnInputChanged()
+    {
+        output.state = Execute();
+        OutputValueChanged?.Invoke();
+    }
+
+    public virtual void OnOutputRemoved()
+    {
+        // TODO: Deixar de desenhar o wire
     }
     
-    protected abstract bool Execute();
+    public abstract bool Execute();
 
-    public abstract void Initialize(Vector3Int gridPosition);
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
 
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 }
