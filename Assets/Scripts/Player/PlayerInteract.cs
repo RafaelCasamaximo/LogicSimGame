@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,38 +12,58 @@ public class PlayerInteract : MonoBehaviour
 {
     public string interactableTag;
     public string itemTag;
-    
+    private bool shouldCheck;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.DrawRay(transform.position + (transform.forward / 10), transform.forward, Color.magenta);
+    }
+
+    private void FixedUpdate()
+    {
+        if (shouldCheck)
+        {
+            Ray ray = new Ray(transform.position, transform.forward);
+            RaycastHit[] hits = Physics.RaycastAll(ray, 3f);
+            
+            foreach (RaycastHit hit in hits)
+            {
+                if (!hit.transform) return;
+                Debug.Log(hit);
+                switch (hit.collider.tag)
+                {
+                    case "Item":
+                        Debug.Log("É um item");
+                        ItemObject itemObject = hit.collider.gameObject.GetComponent<ItemObject>();
+                        itemObject.HandlePickupItem();
+                        return;
+                    case "Dialogue":
+                        Debug.Log("É um dialogo");
+                        DialogueTrigger dialogueTrigger = hit.collider.gameObject.GetComponent<DialogueTrigger>();
+                        dialogueTrigger.InteractTriggerDialogue();
+                        break;
+                    default:
+                        Debug.Log("Outro");
+                        break;
+
+                }
+            }
+            
+            shouldCheck = false;
+        }
     }
 
     public void HandlePlayerMovementInteract(InputAction.CallbackContext context)
     {
         if (!context.performed) return;
-        Ray ray = new Ray(transform.position, transform.forward);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 3f))
-        {
-            if (!hit.transform) return;
-            switch (hit.collider.tag)
-            {
-                case "Item":
-                    ItemObject itemObject = hit.collider.gameObject.GetComponent<ItemObject>();
-                    itemObject.HandlePickupItem();
-                    break;
-                case "Dialogue":
-                    DialogueTrigger dialogueTrigger = hit.collider.gameObject.GetComponent<DialogueTrigger>();
-                    dialogueTrigger.InteractTriggerDialogue();
-                    break;
-            }
-        }
+        shouldCheck = true;
     }
+
 }

@@ -23,4 +23,5 @@ public class InventoryItemData : ScriptableObject
     public GameObject prefab;
     public ObjectType type;
     public AudioClip pickupSound;
+    public bool isLogicGate;
 }

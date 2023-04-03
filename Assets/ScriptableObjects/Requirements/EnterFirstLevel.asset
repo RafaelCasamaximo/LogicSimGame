@@ -16,5 +16,5 @@ MonoBehaviour:
   requirementItems:
   - inventoryItemData: {fileID: 11400000, guid: 0b316142111a14d47bfb12c9f3240b45, type: 2}
     quantity: 1
-  successClip: {fileID: 0}
-  failureClip: {fileID: 0}
+  successClip: {fileID: 8300000, guid: 1e9aed14a0f6d8f46a3bcd6e5e74ffe3, type: 3}
+  failureClip: {fileID: 8300000, guid: 4ac414ba56690aa4d896bbe6bec55f40, type: 3}

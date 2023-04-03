@@ -15,6 +15,6 @@ MonoBehaviour:
   id: hubKey
   displayName: Key with Tag
   icon: {fileID: 21300000, guid: 851737839bb20cb41a2080ef4993eb29, type: 3}
-  prefab: {fileID: 638015110701413150, guid: 8644f17d6829e5e4cb18fe40fe147725, type: 3}
+  prefab: {fileID: 2553631156470762789, guid: 8644f17d6829e5e4cb18fe40fe147725, type: 3}
   type: 0
   pickupSound: {fileID: 8300000, guid: c1468d67918ec01408e8822626fbc753, type: 3}
