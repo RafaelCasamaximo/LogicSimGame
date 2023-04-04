@@ -43,13 +43,16 @@ public struct Output
     public Vector3Int outputPosition;
     public List<Tuple<Gate, int>> connectedGates;
     public bool state;
-
+    public List<Wire> wires;
+    
     public Output(Vector3Int outputPosition, List<Tuple<Gate, int>> connectedGates, bool state)
     {
         this.outputPosition = outputPosition;
         this.connectedGates = connectedGates;
         this.state = state;
+        this.wires = new List<Wire>();
     }
+    
 }
 
 public abstract class Gate : MonoBehaviour
@@ -76,12 +79,19 @@ public abstract class Gate : MonoBehaviour
     }
     
 
-    public virtual void ChangeInput1(Gate gate)
+    public virtual void ChangeInput1(GameObject gateGO)
     {
+
+        Gate gate = gateGO.GetComponent<Gate>();
         input1.connectedGate = gate;
         input1.state = gate.output.state;
         input1.hasGate = true;
+        
         // TODO: Adicionar um novo wire no output
+        Wire wire = gameObject.AddComponent<Wire>();
+        wire.Initialize(gateGO, gate.output.outputPosition, input1.inputPosition, gate.output.state);
+        gate.output.wires.Add(wire);
+        
         gate.output.connectedGates.Add(new Tuple<Gate, int>(this, 1));
         gate.OutputValueChanged += OnInputChanged;
         OnInputChanged();
@@ -112,13 +122,19 @@ public abstract class Gate : MonoBehaviour
         }
     }
     
-    public virtual void ChangeInput2(Gate gate)
+    public virtual void ChangeInput2(GameObject gateGO)
     {
-        input1.connectedGate = gate;
-        input1.state = gate.output.state;
-        input1.hasGate = true;
+        Gate gate = gateGO.GetComponent<Gate>();
+        input2.connectedGate = gate;
+        input2.state = gate.output.state;
+        input2.hasGate = true;
+        
         // TODO: Adicionar um novo wire no output
-        gate.output.connectedGates.Add(new Tuple<Gate, int>(this, 2));
+        Wire wire = gameObject.AddComponent<Wire>();
+        wire.Initialize(gateGO, gate.output.outputPosition, input2.inputPosition, gate.output.state);
+        gate.output.wires.Add(wire);
+        
+        gate.output.connectedGates.Add(new Tuple<Gate, int>(this, 1));
         gate.OutputValueChanged += OnInputChanged;
         OnInputChanged();
     }
@@ -171,7 +187,13 @@ public abstract class Gate : MonoBehaviour
     public virtual void OnInputChanged()
     {
         output.state = Execute();
+        
         OutputValueChanged?.Invoke();
+
+        foreach (var wire in output.wires)
+        {
+            wire.UpdateColor(output.state);
+        }
     }
 
     public virtual void OnOutputRemoved()
@@ -180,16 +202,5 @@ public abstract class Gate : MonoBehaviour
     }
     
     public abstract bool Execute();
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

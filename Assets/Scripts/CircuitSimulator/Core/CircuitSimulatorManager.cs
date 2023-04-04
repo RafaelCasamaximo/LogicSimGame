@@ -2,24 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Palmmedia.ReportGenerator.Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 
-// [Serializable]
-// public enum LogicGate
-// {
-//     Generator = 0,
-//     AND = 1,
-//     NAND = 2,
-//     OR = 3,
-//     NOR = 4,
-//     XOR = 5,
-//     XNOR = 6,
-//     NOT = 7,
-//     Reader = 8,
-// }
 
 /// <summary>
 /// Esse script é responsável pela instanciação dos módulos do CircuitSimulator.
@@ -27,6 +13,7 @@ using UnityEngine.Tilemaps;
 /// </summary>
 public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
 {
+    [Header("Manager Settings")]
     public PlayerInput circuitSimulatorPlayerInput;
     [HideInInspector] public Grid grid;
     public int backgroundWidth;
@@ -41,7 +28,8 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
     /// </summary>
     [HideInInspector] public CircuitSimulatorRenderer circuitSimulatorRenderer;
 
-
+    [Space(10)]
+    [Header("Logic Gates Prefabs")]
     public GameObject Generator;
     public GameObject AND;
     public GameObject NAND;
@@ -60,16 +48,42 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
         circuitSimulatorRenderer.width = backgroundWidth;
         circuitSimulatorRenderer.height = backgroundHeight;
         circuitSimulatorRenderer.FillBackground();
-        
-        // var and = gameObject.AddComponent<ANDGate>();
-        // and.Initialize(new Vector3Int(5, 7));
-        
+
         var g1 = Instantiate(Generator, logicGatesParent.transform);
-        g1.GetComponent<GENERATORGate>().Initialize(new Vector3Int(3, 9));
+        g1.GetComponent<GENERATORGate>().Initialize(new Vector3Int(3, 11));
+        g1.GetComponent<GENERATORGate>().SetState(true);
+        
+        var g2 = Instantiate(Generator, logicGatesParent.transform);
+        g2.GetComponent<GENERATORGate>().Initialize(new Vector3Int(3, 9));
+        g2.GetComponent<GENERATORGate>().SetState(false);
+        
+        var g3 = Instantiate(Generator, logicGatesParent.transform);
+        g3.GetComponent<GENERATORGate>().Initialize(new Vector3Int(3, 7));
+        g3.GetComponent<GENERATORGate>().SetState(false);
         
         var and = Instantiate(AND, logicGatesParent.transform);
-        and.GetComponent<ANDGate>().Initialize(new Vector3Int(6, 10));
+        and.GetComponent<ANDGate>().Initialize(new Vector3Int(8, 10));
+        and.GetComponent<ANDGate>().ChangeInput1(g1);
+        and.GetComponent<ANDGate>().ChangeInput2(g2);
+
+        var not1 = Instantiate(NOT, logicGatesParent.transform);
+        not1.GetComponent<NOTGate>().Initialize(new Vector3Int(5, 7));
+        not1.GetComponent<NOTGate>().ChangeInput1(g3);
         
+        var not2 = Instantiate(NOT, logicGatesParent.transform);
+        not2.GetComponent<NOTGate>().Initialize(new Vector3Int(7, 8));
+        not2.GetComponent<NOTGate>().ChangeInput1(g2);
+
+        var nor = Instantiate(NOR, logicGatesParent.transform);
+        nor.GetComponent<NORGate>().Initialize(new Vector3Int(10, 7));
+        nor.GetComponent<NORGate>().ChangeInput1(not2);
+        nor.GetComponent<NORGate>().ChangeInput2(not1);
+        
+        var xor = Instantiate(XOR, logicGatesParent.transform);
+        xor.GetComponent<XORGate>().Initialize(new Vector3Int(14, 9));
+        xor.GetComponent<XORGate>().ChangeInput1(and);
+        xor.GetComponent<XORGate>().ChangeInput2(nor);
+
         GameManager.Instance.ChangeState(GameState.CircuitSimulatorMoving);
         circuitSimulatorPlayerInput.SwitchCurrentActionMap("Movement");
         SoundManager.Instance.PlayMusic(0);
