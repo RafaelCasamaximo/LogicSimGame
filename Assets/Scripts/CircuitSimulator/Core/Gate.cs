@@ -81,7 +81,6 @@ public abstract class Gate : MonoBehaviour
 
     public virtual void ChangeInput1(GameObject gateGO)
     {
-
         // Pega o componente do gameobject e define o novo input como o output do parametro
         Gate gate = gateGO.GetComponent<Gate>();
         input1.connectedGate = gate;
@@ -126,17 +125,19 @@ public abstract class Gate : MonoBehaviour
     
     public virtual void ChangeInput2(GameObject gateGO)
     {
+        // Pega o componente do gameobject e define o novo input como o output do parametro
         Gate gate = gateGO.GetComponent<Gate>();
         input2.connectedGate = gate;
         input2.state = gate.output.state;
         input2.hasGate = true;
         
-        // TODO: Adicionar um novo wire no output
+        // Adiciona um componente de fio como filho do logic gates passado
         Wire wire = gateGO.AddComponent<Wire>();
         wire.Initialize(gateGO, gate.output.outputPosition, input2.inputPosition, gate.output.state);
         gate.output.wires.Add(wire);
         
-        gate.output.connectedGates.Add(new Tuple<Gate, int>(this, 1));
+        // Adiciona esse gate como output no parametro passado
+        gate.output.connectedGates.Add(new Tuple<Gate, int>(this, 2));
         gate.OutputValueChanged += OnInputChanged;
         OnInputChanged();
     }

@@ -11,8 +11,6 @@ public class ANDGate : Gate
         bool value1 = input1.hasGate & input1.state;
         bool value2 = input2.hasGate & input2.state;
 
-        Debug.Log(this + ": " + "(" + value1 + " AND " + value2 + "): " + (value1 & value2));
-        
         return value1 & value2;
     }
 }

@@ -84,12 +84,16 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
         xor.GetComponent<XORGate>().ChangeInput1(and);
         xor.GetComponent<XORGate>().ChangeInput2(nor);
 
+        var reader = Instantiate(Reader, logicGatesParent.transform);
+        reader.GetComponent<READERGate>().Initialize(new Vector3Int(18, 9));
+        reader.GetComponent<READERGate>().ChangeInput1(xor);
+
         GameManager.Instance.ChangeState(GameState.CircuitSimulatorMoving);
         circuitSimulatorPlayerInput.SwitchCurrentActionMap("Movement");
         SoundManager.Instance.PlayMusic(0);
         SoundManager.Instance.ChangeMusicVolume(0.015f);
         
-        StartCoroutine(changeGenerators(g1, g2, g3));
+        StartCoroutine(changeGenerators(g1, g2, g3, and));
         
     }
 
@@ -109,15 +113,21 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
     //     circuitSimulatorRenderer.logicGatesTileMap.ClearAllTiles();
     // }
 
-    public IEnumerator changeGenerators(GameObject go1, GameObject go2, GameObject go3)
+    public IEnumerator changeGenerators(GameObject go1, GameObject go2, GameObject go3, GameObject and)
     {
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(1.5f);
+        go1.GetComponent<GENERATORGate>().SetState(!go1.GetComponent<GENERATORGate>().output.state);
+        yield return new WaitForSeconds(1.5f);
         go2.GetComponent<GENERATORGate>().SetState(!go2.GetComponent<GENERATORGate>().output.state);
-        // yield return new WaitForSeconds(0.7f);
-        // go2.GetComponent<GENERATORGate>().SetState(!go2.GetComponent<GENERATORGate>().output.state);
-        // yield return new WaitForSeconds(0.7f);
-        // go3.GetComponent<GENERATORGate>().SetState(!go3.GetComponent<GENERATORGate>().output.state);
-        StartCoroutine(changeGenerators(go1, go2, go3));
+        yield return new WaitForSeconds(1.5f);
+        go3.GetComponent<GENERATORGate>().SetState(!go3.GetComponent<GENERATORGate>().output.state);
+        yield return new WaitForSeconds(1.5f);
+        go1.GetComponent<GENERATORGate>().SetState(!go1.GetComponent<GENERATORGate>().output.state);
+        yield return new WaitForSeconds(1.5f);
+        go2.GetComponent<GENERATORGate>().SetState(!go2.GetComponent<GENERATORGate>().output.state);
+        yield return new WaitForSeconds(1.5f);
+        go3.GetComponent<GENERATORGate>().SetState(!go3.GetComponent<GENERATORGate>().output.state);
+        StartCoroutine(changeGenerators(go1, go2, go3, and));
     }
     
 }

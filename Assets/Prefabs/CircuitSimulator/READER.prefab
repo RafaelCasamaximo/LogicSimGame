@@ -49,6 +49,8 @@ MonoBehaviour:
     gridPosition: {x: 0, y: 0, z: 0}
     size: {x: 1, y: 1, z: 0}
     sprite: {fileID: 21300000, guid: 8ca9b31a1a4b97749a8ef6aa45edb0ff, type: 3}
+  activeSprite: {fileID: 21300000, guid: 599d12d7529eba144968c9f130e900a9, type: 3}
+  disableSprite: {fileID: 21300000, guid: 64ccd8b29eeeaaf4188eb09eb9f2ffc4, type: 3}
 --- !u!212 &3915789378988671501
 SpriteRenderer:
   m_ObjectHideFlags: 0
