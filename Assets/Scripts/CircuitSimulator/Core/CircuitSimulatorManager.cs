@@ -55,11 +55,11 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
         
         var g2 = Instantiate(Generator, logicGatesParent.transform);
         g2.GetComponent<GENERATORGate>().Initialize(new Vector3Int(3, 9));
-        g2.GetComponent<GENERATORGate>().SetState(false);
+        g2.GetComponent<GENERATORGate>().SetState(true);
         
         var g3 = Instantiate(Generator, logicGatesParent.transform);
         g3.GetComponent<GENERATORGate>().Initialize(new Vector3Int(3, 7));
-        g3.GetComponent<GENERATORGate>().SetState(false);
+        g3.GetComponent<GENERATORGate>().SetState(true);
         
         var and = Instantiate(AND, logicGatesParent.transform);
         and.GetComponent<ANDGate>().Initialize(new Vector3Int(8, 10));
@@ -89,6 +89,8 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
         SoundManager.Instance.PlayMusic(0);
         SoundManager.Instance.ChangeMusicVolume(0.015f);
         
+        StartCoroutine(changeGenerators(g1, g2, g3));
+        
     }
 
     // // Itera sobre a lista de Gates que foram inseridas pelo o jogador e deleta todos
@@ -106,5 +108,16 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
     //     }
     //     circuitSimulatorRenderer.logicGatesTileMap.ClearAllTiles();
     // }
+
+    public IEnumerator changeGenerators(GameObject go1, GameObject go2, GameObject go3)
+    {
+        yield return new WaitForSeconds(0.7f);
+        go2.GetComponent<GENERATORGate>().SetState(!go2.GetComponent<GENERATORGate>().output.state);
+        // yield return new WaitForSeconds(0.7f);
+        // go2.GetComponent<GENERATORGate>().SetState(!go2.GetComponent<GENERATORGate>().output.state);
+        // yield return new WaitForSeconds(0.7f);
+        // go3.GetComponent<GENERATORGate>().SetState(!go3.GetComponent<GENERATORGate>().output.state);
+        StartCoroutine(changeGenerators(go1, go2, go3));
+    }
     
 }

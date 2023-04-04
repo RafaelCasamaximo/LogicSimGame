@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class READERGate : Gate
 {
-    public virtual void Initialize(Vector3Int gridPosition)
+    public override void Initialize(Vector3Int gridPosition)
     {
         properties.gridPosition = gridPosition;
         input1 = new Input(new Vector3Int(gridPosition.x, gridPosition.y), null, false, false);

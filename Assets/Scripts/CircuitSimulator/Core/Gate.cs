@@ -82,16 +82,18 @@ public abstract class Gate : MonoBehaviour
     public virtual void ChangeInput1(GameObject gateGO)
     {
 
+        // Pega o componente do gameobject e define o novo input como o output do parametro
         Gate gate = gateGO.GetComponent<Gate>();
         input1.connectedGate = gate;
         input1.state = gate.output.state;
         input1.hasGate = true;
         
-        // TODO: Adicionar um novo wire no output
-        Wire wire = gameObject.AddComponent<Wire>();
+        // Adiciona um componente de fio como filho do logic gates passado
+        Wire wire = gateGO.AddComponent<Wire>();
         wire.Initialize(gateGO, gate.output.outputPosition, input1.inputPosition, gate.output.state);
         gate.output.wires.Add(wire);
         
+        // Adiciona esse gate como output no parametro passado
         gate.output.connectedGates.Add(new Tuple<Gate, int>(this, 1));
         gate.OutputValueChanged += OnInputChanged;
         OnInputChanged();
@@ -130,7 +132,7 @@ public abstract class Gate : MonoBehaviour
         input2.hasGate = true;
         
         // TODO: Adicionar um novo wire no output
-        Wire wire = gameObject.AddComponent<Wire>();
+        Wire wire = gateGO.AddComponent<Wire>();
         wire.Initialize(gateGO, gate.output.outputPosition, input2.inputPosition, gate.output.state);
         gate.output.wires.Add(wire);
         
@@ -177,7 +179,7 @@ public abstract class Gate : MonoBehaviour
                 connectedGate.Item1.RemoveInput1();
             }
 
-            if (connectedGate.Item2 == 1)
+            if (connectedGate.Item2 == 2)
             {
                 connectedGate.Item1.RemoveInput2();
             }
@@ -186,14 +188,33 @@ public abstract class Gate : MonoBehaviour
 
     public virtual void OnInputChanged()
     {
+        
+        // Calcula o novo estado
         output.state = Execute();
         
-        OutputValueChanged?.Invoke();
+        // Atualiza nos gates que tem esse como entrada o estado calculado
+        foreach (var tupleGateInt in output.connectedGates)
+        {
+            if (tupleGateInt.Item2 == 1)
+            {
+                tupleGateInt.Item1.input1.state = output.state;
+            }
 
+            if (tupleGateInt.Item2 == 2)
+            {
+                tupleGateInt.Item1.input2.state = output.state;
+            }
+        }
+        
+        // Reflete a cor do estado no wire
         foreach (var wire in output.wires)
         {
             wire.UpdateColor(output.state);
         }
+        
+        // Invoca metodo para gates que dependem desse
+        OutputValueChanged?.Invoke();
+        
     }
 
     public virtual void OnOutputRemoved()

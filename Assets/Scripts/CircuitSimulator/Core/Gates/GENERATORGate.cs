@@ -6,7 +6,7 @@ using UnityEngine;
 public class GENERATORGate : Gate
 {
     
-    public virtual void Initialize(Vector3Int gridPosition)
+    public override void Initialize(Vector3Int gridPosition)
     {
         properties.gridPosition = gridPosition;
         input1 = new Input(new Vector3Int(gridPosition.x, gridPosition.y), null, false, false);
@@ -23,8 +23,9 @@ public class GENERATORGate : Gate
     public void SetState(bool state)
     {
         input1.state = state;
-        output.state = input1.state;
+        // output.state = Execute();
         OnInputChanged();
+        
     }
     
 }
