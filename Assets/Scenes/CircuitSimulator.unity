@@ -862,7 +862,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   circuitSimulatorPlayerInput: {fileID: 2112710166}
-  grid: {fileID: 0}
+  grid: {fileID: 538501736}
   backgroundWidth: 20
   backgroundHeight: 15
   logicGatesParent: {fileID: 716670283}

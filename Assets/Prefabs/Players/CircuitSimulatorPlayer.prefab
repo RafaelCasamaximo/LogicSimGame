@@ -150,7 +150,6 @@ GameObject:
   m_Component:
   - component: {fileID: 232537820502236591}
   - component: {fileID: 232537820502236588}
-  - component: {fileID: 232537820502236589}
   m_Layer: 0
   m_Name: CircuitSimulatorPlayer
   m_TagString: Untagged
@@ -326,21 +325,6 @@ MonoBehaviour:
   m_DefaultActionMap: FreeCamera
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &232537820502236589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 232537820502236590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcf95c0e06cb84649b3caf6d2576fc82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  horizontalSensitivity: 20
-  verticalSensitivity: 20
-  zoomSensitivity: 10
 --- !u!1 &1943497098349719087
 GameObject:
   m_ObjectHideFlags: 0

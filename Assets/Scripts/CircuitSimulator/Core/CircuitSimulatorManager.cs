@@ -15,7 +15,7 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
 {
     [Header("Manager Settings")]
     public PlayerInput circuitSimulatorPlayerInput;
-    [HideInInspector] public Grid grid;
+    public Grid grid;
     public int backgroundWidth;
     public int backgroundHeight;
     public GameObject logicGatesParent;
@@ -42,8 +42,6 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
     
     void Start()
     {
-        
-        grid = GetComponent<Grid>();
         circuitSimulatorRenderer = GetComponent<CircuitSimulatorRenderer>();
         circuitSimulatorRenderer.width = backgroundWidth;
         circuitSimulatorRenderer.height = backgroundHeight;

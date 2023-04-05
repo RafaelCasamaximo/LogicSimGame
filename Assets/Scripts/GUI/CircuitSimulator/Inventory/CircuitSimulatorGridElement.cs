@@ -33,4 +33,9 @@ public class CircuitSimulatorGridElement : MonoBehaviour
         }
         quantity.text = item.stackSize.ToString();
     }
+
+    private void HandleSelectItem()
+    {
+        
+    }
 }
