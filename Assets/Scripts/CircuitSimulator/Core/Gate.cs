@@ -82,6 +82,8 @@ public abstract class Gate : MonoBehaviour
 
     public virtual void ChangeInput1(GameObject gateGO)
     {
+        RemoveInput1();
+        
         // Pega o componente do gameobject e define o novo input como o output do parametro
         Gate gate = gateGO.GetComponent<Gate>();
         input1.connectedGate = gate;
@@ -101,38 +103,39 @@ public abstract class Gate : MonoBehaviour
   
     public virtual void RemoveInput1()
     {
-        if (input1.hasGate)
-        {
-            // Remove wire between input and output
-            int index = input1.connectedGate.output.wires.FindIndex(wire => wire.gate == this);
-            input1.connectedGate.output.wires[index].Delete();
-            Destroy(input1.connectedGate.output.wires[index].wireObject);
-            Destroy(input1.connectedGate.output.wires[index]);
-            input1.connectedGate.output.wires.RemoveAll(wire => wire.gate == this);
-            
-            // Remove the connection between this gate and the input1 gate
-            input1.connectedGate.output.connectedGates.RemoveAll(tuple => tuple.Item1 == this);
-            input1.connectedGate.OutputValueChanged -= OnInputChanged;
-            
-            // Execute cleanup on the gate that got removed
-            // Mainly for wire removal
-            input1.connectedGate.OnOutputRemoved();
-            
-            // Reset the input1 fields
-            input1.connectedGate = null;
-            input1.state = false;
-            input1.hasGate = false;
+        if (!input1.hasGate) return;
 
-            // Trigger the input removed event
-            InputRemoved?.Invoke();
+        // Remove wire between input and output
+        int index = input1.connectedGate.output.wires.FindIndex(wire => wire.gate == this);
+        input1.connectedGate.output.wires[index].Delete();
+        Destroy(input1.connectedGate.output.wires[index].wireObject);
+        Destroy(input1.connectedGate.output.wires[index]);
+        input1.connectedGate.output.wires.RemoveAll(wire => wire.gate == this);
+            
+        // Remove the connection between this gate and the input1 gate
+        input1.connectedGate.output.connectedGates.RemoveAll(tuple => tuple.Item1 == this);
+        input1.connectedGate.OutputValueChanged -= OnInputChanged;
+            
+        // Execute cleanup on the gate that got removed
+        // Mainly for wire removal
+        input1.connectedGate.OnOutputRemoved();
+            
+        // Reset the input1 fields
+        input1.connectedGate = null;
+        input1.state = false;
+        input1.hasGate = false;
 
-            // Recalculate the output of this gate
-            OnInputChanged();
-        }
+        // Trigger the input removed event
+        InputRemoved?.Invoke();
+
+        // Recalculate the output of this gate
+        OnInputChanged();
     }
     
     public virtual void ChangeInput2(GameObject gateGO)
     {
+        RemoveInput2();
+        
         // Pega o componente do gameobject e define o novo input como o output do parametro
         Gate gate = gateGO.GetComponent<Gate>();
         input2.connectedGate = gate;
@@ -152,34 +155,33 @@ public abstract class Gate : MonoBehaviour
   
     public virtual void RemoveInput2()
     {
-        if (input2.hasGate)
-        {
-            // Remove wire between input and output
-            int index = input2.connectedGate.output.wires.FindIndex(wire => wire.gate == this);
-            input2.connectedGate.output.wires[index].Delete();
-            Destroy(input2.connectedGate.output.wires[index].wireObject);
-            input2.connectedGate.output.wires.RemoveAll(wire => wire.gate == this);
+        if (!input2.hasGate) return;
+        
+        // Remove wire between input and output
+        int index = input2.connectedGate.output.wires.FindIndex(wire => wire.gate == this);
+        input2.connectedGate.output.wires[index].Delete();
+        Destroy(input2.connectedGate.output.wires[index].wireObject);
+        input2.connectedGate.output.wires.RemoveAll(wire => wire.gate == this);
 
             
-            // Remove the connection between this gate and the input2 gate
-            input2.connectedGate.output.connectedGates.RemoveAll(tuple => tuple.Item1 == this);
-            input2.connectedGate.OutputValueChanged -= OnInputChanged;
+        // Remove the connection between this gate and the input2 gate
+        input2.connectedGate.output.connectedGates.RemoveAll(tuple => tuple.Item1 == this);
+        input2.connectedGate.OutputValueChanged -= OnInputChanged;
             
-            // Execute cleanup on the gate that got removed
-            // Mainly for wire removal
-            input2.connectedGate.OnOutputRemoved();
+        // Execute cleanup on the gate that got removed
+        // Mainly for wire removal
+        input2.connectedGate.OnOutputRemoved();
             
-            // Reset the input2 fields
-            input2.connectedGate = null;
-            input2.state = false;
-            input2.hasGate = false;
+        // Reset the input2 fields
+        input2.connectedGate = null;
+        input2.state = false;
+        input2.hasGate = false;
 
-            // Trigger the input removed event
-            InputRemoved?.Invoke();
+        // Trigger the input removed event
+        InputRemoved?.Invoke();
 
-            // Recalculate the output of this gate
-            OnInputChanged();
-        }
+        // Recalculate the output of this gate
+        OnInputChanged();
     }
 
     public virtual void RemoveOutputs()

@@ -18,3 +18,4 @@ MonoBehaviour:
   prefab: {fileID: 8035245932681811035, guid: fe795796f94388c4395aae8bf5affd1e, type: 3}
   type: 0
   pickupSound: {fileID: 8300000, guid: bc5b0602b6a0cc84ea942470b78b7adf, type: 3}
+  isLogicGate: 1

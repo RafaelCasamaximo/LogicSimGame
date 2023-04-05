@@ -99,6 +99,13 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
         
         and.GetComponent<ANDGate>().Delete();
         
+        var and2 = Instantiate(AND, logicGatesParent.transform);
+        and2.GetComponent<ANDGate>().Initialize(new Vector3Int(8, 10));
+        and2.GetComponent<ANDGate>().ChangeInput1(g1);
+        and2.GetComponent<ANDGate>().ChangeInput2(g2);
+        
+        xor.GetComponent<XORGate>().ChangeInput1(and2);
+        
         // not2.GetComponent<NOTGate>().Delete();
         
     }

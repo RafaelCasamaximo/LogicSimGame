@@ -12,7 +12,6 @@ public class InventoryGUI : GUIControl
     public override string key { get { return "InventoryGUI"; } }
     public GameObject grid;
     public GameObject gridElementPrefab;
-    public PlayerInput playerInput;
     protected override void Start()
     {
         InventorySystem.Instance.onInventoryChangedEvent += OnUpdateInventory;
