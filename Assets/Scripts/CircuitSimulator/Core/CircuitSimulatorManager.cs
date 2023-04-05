@@ -95,6 +95,12 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
         
         StartCoroutine(changeGenerators(g1, g2, g3, and));
         
+        //and.GetComponent<ANDGate>().RemoveInput1();
+        
+        and.GetComponent<ANDGate>().Delete();
+        
+        // not2.GetComponent<NOTGate>().Delete();
+        
     }
 
     // // Itera sobre a lista de Gates que foram inseridas pelo o jogador e deleta todos

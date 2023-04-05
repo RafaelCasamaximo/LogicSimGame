@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -89,7 +90,7 @@ public abstract class Gate : MonoBehaviour
         
         // Adiciona um componente de fio como filho do logic gates passado
         Wire wire = gateGO.AddComponent<Wire>();
-        wire.Initialize(gateGO, gate.output.outputPosition, input1.inputPosition, gate.output.state);
+        wire.Initialize(this, gateGO, gate.output.outputPosition, input1.inputPosition, gate.output.state);
         gate.output.wires.Add(wire);
         
         // Adiciona esse gate como output no parametro passado
@@ -102,6 +103,13 @@ public abstract class Gate : MonoBehaviour
     {
         if (input1.hasGate)
         {
+            // Remove wire between input and output
+            int index = input1.connectedGate.output.wires.FindIndex(wire => wire.gate == this);
+            input1.connectedGate.output.wires[index].Delete();
+            Destroy(input1.connectedGate.output.wires[index].wireObject);
+            Destroy(input1.connectedGate.output.wires[index]);
+            input1.connectedGate.output.wires.RemoveAll(wire => wire.gate == this);
+            
             // Remove the connection between this gate and the input1 gate
             input1.connectedGate.output.connectedGates.RemoveAll(tuple => tuple.Item1 == this);
             input1.connectedGate.OutputValueChanged -= OnInputChanged;
@@ -133,7 +141,7 @@ public abstract class Gate : MonoBehaviour
         
         // Adiciona um componente de fio como filho do logic gates passado
         Wire wire = gateGO.AddComponent<Wire>();
-        wire.Initialize(gateGO, gate.output.outputPosition, input2.inputPosition, gate.output.state);
+        wire.Initialize(this, gateGO, gate.output.outputPosition, input2.inputPosition, gate.output.state);
         gate.output.wires.Add(wire);
         
         // Adiciona esse gate como output no parametro passado
@@ -144,20 +152,27 @@ public abstract class Gate : MonoBehaviour
   
     public virtual void RemoveInput2()
     {
-        if (input1.hasGate)
+        if (input2.hasGate)
         {
-            // Remove the connection between this gate and the input1 gate
-            input1.connectedGate.output.connectedGates.RemoveAll(tuple => tuple.Item1 == this);
-            input1.connectedGate.OutputValueChanged -= OnInputChanged;
+            // Remove wire between input and output
+            int index = input2.connectedGate.output.wires.FindIndex(wire => wire.gate == this);
+            input2.connectedGate.output.wires[index].Delete();
+            Destroy(input2.connectedGate.output.wires[index].wireObject);
+            input2.connectedGate.output.wires.RemoveAll(wire => wire.gate == this);
+
+            
+            // Remove the connection between this gate and the input2 gate
+            input2.connectedGate.output.connectedGates.RemoveAll(tuple => tuple.Item1 == this);
+            input2.connectedGate.OutputValueChanged -= OnInputChanged;
             
             // Execute cleanup on the gate that got removed
             // Mainly for wire removal
-            input1.connectedGate.OnOutputRemoved();
+            input2.connectedGate.OnOutputRemoved();
             
-            // Reset the input1 fields
-            input1.connectedGate = null;
-            input1.state = false;
-            input1.hasGate = false;
+            // Reset the input2 fields
+            input2.connectedGate = null;
+            input2.state = false;
+            input2.hasGate = false;
 
             // Trigger the input removed event
             InputRemoved?.Invoke();
@@ -167,13 +182,10 @@ public abstract class Gate : MonoBehaviour
         }
     }
 
-    public virtual void Delete()
+    public virtual void RemoveOutputs()
     {
-        RemoveInput1();
-        RemoveInput2();
-        
         // Remove this gate from all the outputs that it is connected to
-        foreach (Tuple<Gate, int> connectedGate in output.connectedGates)
+        foreach (Tuple<Gate, int> connectedGate in output.connectedGates.ToList())
         {
             if (connectedGate.Item2 == 1)
             {
@@ -185,6 +197,14 @@ public abstract class Gate : MonoBehaviour
                 connectedGate.Item1.RemoveInput2();
             }
         }
+    }
+
+    public virtual void Delete()
+    {
+        RemoveInput1();
+        RemoveInput2();
+        RemoveOutputs();
+        Destroy(this.gameObject);
     }
 
     public virtual void OnInputChanged()
@@ -220,7 +240,7 @@ public abstract class Gate : MonoBehaviour
 
     public virtual void OnOutputRemoved()
     {
-        // TODO: Deixar de desenhar o wire
+        
     }
     
     public abstract bool Execute();

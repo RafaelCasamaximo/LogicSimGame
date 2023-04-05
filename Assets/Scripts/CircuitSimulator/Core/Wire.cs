@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class Wire : MonoBehaviour
 {
+    
+    public Gate gate;
     public LineRenderer wire;
     public Vector3 startPoint;
     public Vector3 endPoint;
-
-    public void Initialize(GameObject gateGO, Vector3Int start, Vector3Int end, bool state)
+    public GameObject wireObject;
+    
+    public void Initialize(Gate gate, GameObject gateGO, Vector3Int start, Vector3Int end, bool state)
     {
         // Define os pontos
+        this.gate = gate;
         startPoint = CircuitSimulatorManager.Instance.grid.GetCellCenterWorld(start);
         startPoint.z = -0.01f;
         endPoint = CircuitSimulatorManager.Instance.grid.GetCellCenterWorld(end);
@@ -19,6 +23,7 @@ public class Wire : MonoBehaviour
         // Cria objeto e define como um filho do objeto que tem o wire como output
         GameObject wireObject = new GameObject("Wire");
         wireObject.transform.SetParent(gateGO.transform);
+        this.wireObject = wireObject;
         
         // Adiciona o Line Renderer e define as propriedades
         wire = wireObject.AddComponent<LineRenderer>();
@@ -54,6 +59,11 @@ public class Wire : MonoBehaviour
             wire.startColor = ColorPalette.deactivatedWire;
             wire.endColor = ColorPalette.deactivatedWire;
         }
+    }
+
+    public void Delete()
+    {
+        Destroy(wire);
     }
     
 }
