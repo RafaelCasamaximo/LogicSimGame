@@ -48,8 +48,8 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
     public GameObject NOT;
     public GameObject Reader;
 
-    [HideInInspector] public List<Gate> levelGates = new List<Gate>();
-    [HideInInspector] public List<Gate> userGates = new List<Gate>();
+    [HideInInspector] public List<GameObject> levelGates = new List<GameObject>();
+    [HideInInspector] public List<GameObject> userGates = new List<GameObject>();
 
     void Start()
     {

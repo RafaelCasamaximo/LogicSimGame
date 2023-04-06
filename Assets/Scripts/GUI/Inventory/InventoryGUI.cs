@@ -18,6 +18,11 @@ public class InventoryGUI : GUIControl
         base.Start();
     }
 
+    public void OnDestroy()
+    {
+        InventorySystem.Instance.onInventoryChangedEvent -= OnUpdateInventory;
+    }
+
     public void OnUpdateInventory()
     {
         foreach (Transform t in grid.transform)

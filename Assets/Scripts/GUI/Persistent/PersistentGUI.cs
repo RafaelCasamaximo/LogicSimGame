@@ -20,6 +20,12 @@ public class PersistentGUI : GUIControl
         base.Start();
     }
 
+    public void OnDestroy()
+    {
+        InventorySystem.Instance.onInventorySelectItem -= DrawSelectItem;
+        InventorySystem.Instance.onInventoryRemoveSelectedItem -= DrawSelectItem;
+    }
+
     /// <summary>
     /// Desenha o objeto selecionado pelo InventorySystem na mão do player
     /// </summary>

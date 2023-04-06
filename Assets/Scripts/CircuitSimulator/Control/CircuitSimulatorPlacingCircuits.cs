@@ -11,6 +11,7 @@ public class CircuitSimulatorPlacingCircuits : MonoBehaviour
     private int backgroundWidth;
     private int backgroundHeight;
     private Vector2 cursorMovement;
+    [HideInInspector] public Vector3Int cellPosition;
     [HideInInspector] public bool isMoving;
     [HideInInspector] public Vector3 origPos;
     [HideInInspector] public Vector3 targetPos;
@@ -55,6 +56,7 @@ public class CircuitSimulatorPlacingCircuits : MonoBehaviour
     {
         this.prefab = prefab;
         this.item = item;
+        canPlace = CheckPosition(cellPosition);
     }
 
     public bool CheckPosition(Vector3Int cursorPosition)
@@ -87,8 +89,63 @@ public class CircuitSimulatorPlacingCircuits : MonoBehaviour
 
     public void HandleCircuitSimulatorPlacingCircuitConfirm(InputAction.CallbackContext context)
     {
+        if (!context.performed) return;
         //TODO: Implementar instanciar o novo logic gate
+        if (isMoving)
+        {
+            return;
+        }
+        if (!canPlace)
+        {
+            SoundManager.Instance.PlaySound(errorSound);
+            return;
+        }
+
+        InstantiateGate();
         SoundManager.Instance.PlaySound(confirmSound);
+        InventorySystem.Instance.Remove(item.data);
+        QuitPlacingCircuits();
+        
+    }
+
+    public void QuitPlacingCircuits()
+    {
+        CircuitSimulatorManager.Instance.ResetCursorSprite();
+        GameManager.Instance.ChangeState(GameState.CircuitSimulatorMoving);
+        CircuitSimulatorManager.Instance.circuitSimulatorPlayerInput.SwitchCurrentActionMap("Movement");
+    }
+    
+    public void InstantiateGate()
+    {
+        var gateGO = Instantiate(prefab, CircuitSimulatorManager.Instance.logicGatesParent.transform);
+
+        switch (item.data.id)
+        {
+            case "andItem":
+                gateGO.GetComponent<ANDGate>().Initialize(cellPosition);
+                break;
+            case "nandItem":
+                gateGO.GetComponent<NANDGate>().Initialize(cellPosition);
+                break;
+            case "orItem":
+                gateGO.GetComponent<ORGate>().Initialize(cellPosition);
+                break;
+            case "norItem":
+                gateGO.GetComponent<NORGate>().Initialize(cellPosition);
+                break;
+            case "xorItem":
+                gateGO.GetComponent<XORGate>().Initialize(cellPosition);
+                break;
+            case "xnorItem":
+                gateGO.GetComponent<XNORGate>().Initialize(cellPosition);
+                break;
+            case "notItem":
+                gateGO.GetComponent<NOTGate>().Initialize(cellPosition);
+                break;
+        }
+        
+        CircuitSimulatorManager.Instance.userGates.Add(gateGO);
+        
     }
     
     public void HandleCircuitSimulatorPlacingCircuitCancel(InputAction.CallbackContext context)
@@ -118,7 +175,7 @@ public class CircuitSimulatorPlacingCircuits : MonoBehaviour
             yield return null;
         }
 
-        Vector3Int cellPosition = CircuitSimulatorManager.Instance.grid.WorldToCell(transform.position);
+        cellPosition = CircuitSimulatorManager.Instance.grid.WorldToCell(transform.position);
 
         if (CheckPosition(cellPosition) != canPlace)
         {

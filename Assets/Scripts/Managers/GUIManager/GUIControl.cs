@@ -23,7 +23,6 @@ public abstract class GUIControl : MonoBehaviour
 
     // private void OnDestroy()
     // {
-    //     Debug.Log(GUIManager.Instance);
     //     GUIManager.Instance.Unregister(this);
     // }
 
