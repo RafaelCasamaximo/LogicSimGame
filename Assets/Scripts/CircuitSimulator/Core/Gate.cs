@@ -13,12 +13,14 @@ public struct Properties
     [HideInInspector] public Vector3Int gridPosition;
     public Vector3Int size;
     public Sprite sprite;
+    public Sprite lightSprite;
 
-    public Properties(Vector3Int gridPosition, Vector3Int size, Sprite sprite)
+    public Properties(Vector3Int gridPosition, Vector3Int size, Sprite sprite, Sprite lightSprite)
     {
         this.gridPosition = gridPosition;
         this.size = size;
         this.sprite = sprite;
+        this.lightSprite = lightSprite;
     }
 }
 

@@ -123,11 +123,12 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
 
     public void StartPlacingCircuit(InventoryItem item)
     {
-        Debug.Log(item);
         GameObject gate = ConvertItemDataToPrefab(item);
         if (gate == null) return;
         
         UpdateCursorSprite(gate);
+        circuitSimulatorPlacingCircuits.canPlace = circuitSimulatorPlacingCircuits.CheckPosition(circuitSimulatorPlacingCircuits.cellPosition);
+        UpdateCursorSpriteAvailability(circuitSimulatorPlacingCircuits.canPlace);
         
         GameManager.Instance.ChangeState(GameState.CircuitSimulatorPlacingCircuits);
         circuitSimulatorPlacingCircuits.Setup(gate, item);
@@ -136,7 +137,7 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
     public void UpdateCursorSprite(GameObject gateGO)
     {
         Gate gate = gateGO.GetComponent<Gate>();
-        circuitSimulatorPlayerCursor.sprite = gate.properties.sprite;
+        circuitSimulatorPlayerCursor.sprite = gate.properties.lightSprite;
         circuitSimulatorPlayerCursor.color = new Color(1f, 1f, 1f, 0.6f);
     }
 

@@ -49,6 +49,7 @@ MonoBehaviour:
     gridPosition: {x: 0, y: 0, z: 0}
     size: {x: 3, y: 3, z: 0}
     sprite: {fileID: 21300000, guid: 801b4f3e4017b52448f03bbe247f8bae, type: 3}
+    lightSprite: {fileID: 21300000, guid: 90e3053aed378dd4b8ceee3223c41a4c, type: 3}
 --- !u!212 &-4454188781985443572
 SpriteRenderer:
   m_ObjectHideFlags: 0

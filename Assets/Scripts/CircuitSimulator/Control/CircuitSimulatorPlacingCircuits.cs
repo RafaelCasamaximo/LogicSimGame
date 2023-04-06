@@ -27,7 +27,7 @@ public class CircuitSimulatorPlacingCircuits : MonoBehaviour
     public AudioClip confirmSound;
     public AudioClip cancelSound;
     public AudioClip errorSound;
-    private bool canPlace;
+    public bool canPlace;
 
     [HideInInspector] public GameObject prefab;
     [HideInInspector] public InventoryItem item;
@@ -41,6 +41,7 @@ public class CircuitSimulatorPlacingCircuits : MonoBehaviour
         boundary = new Vector3Int(backgroundWidth - 1, backgroundHeight - 1, 0);
         globalLBBoundary = CircuitSimulatorManager.Instance.grid.GetCellCenterWorld(Vector3Int.zero);
         globalRTBoundary = CircuitSimulatorManager.Instance.grid.GetCellCenterWorld(boundary);
+        cellPosition = CircuitSimulatorManager.Instance.grid.WorldToCell(transform.position);
     }
 
     // Update is called once per frame
