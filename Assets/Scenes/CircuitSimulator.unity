@@ -865,7 +865,7 @@ MonoBehaviour:
   circuitSimulatorPlayerInput: {fileID: 2112710166}
   circuitSimulatorPlayerCursor: {fileID: 2112710168}
   defaultCursorSprite: {fileID: 21300000, guid: 138780f62e50bfe4bb60ae60c0ae2a4e, type: 3}
-  circuitSimulatorPlacingCircuits: {fileID: 0}
+  circuitSimulatorPlacingCircuits: {fileID: 2112710170}
   grid: {fileID: 538501736}
   backgroundWidth: 20
   backgroundHeight: 15
@@ -2356,8 +2356,24 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 232537820502236588, guid: 7be997d576b390a498d3f1606578791f, type: 3}
-      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      propertyPath: m_ActionEvents.Array.data[21].m_PersistentCalls.m_Calls.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 232537820502236588, guid: 7be997d576b390a498d3f1606578791f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[22].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 232537820502236588, guid: 7be997d576b390a498d3f1606578791f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 232537820502236588, guid: 7be997d576b390a498d3f1606578791f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[21].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 232537820502236588, guid: 7be997d576b390a498d3f1606578791f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[22].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 232537820502236588, guid: 7be997d576b390a498d3f1606578791f, type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2366,9 +2382,25 @@ PrefabInstance:
     - target: {fileID: 232537820502236588, guid: 7be997d576b390a498d3f1606578791f, type: 3}
       propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 953897881}
+      objectReference: {fileID: 2112710170}
+    - target: {fileID: 232537820502236588, guid: 7be997d576b390a498d3f1606578791f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[21].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2112710170}
+    - target: {fileID: 232537820502236588, guid: 7be997d576b390a498d3f1606578791f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[22].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2112710170}
     - target: {fileID: 232537820502236588, guid: 7be997d576b390a498d3f1606578791f, type: 3}
       propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 232537820502236588, guid: 7be997d576b390a498d3f1606578791f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[21].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 232537820502236588, guid: 7be997d576b390a498d3f1606578791f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[22].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 232537820502236588, guid: 7be997d576b390a498d3f1606578791f, type: 3}
@@ -2376,8 +2408,44 @@ PrefabInstance:
       value: HandleCircuitSimulatorComparingOutputCloseComparingOutput
       objectReference: {fileID: 0}
     - target: {fileID: 232537820502236588, guid: 7be997d576b390a498d3f1606578791f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HandleCircuitSimulatorPlacingCircuitsMove
+      objectReference: {fileID: 0}
+    - target: {fileID: 232537820502236588, guid: 7be997d576b390a498d3f1606578791f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[21].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HandleCircuitSimulatorPlacingCircuitConfirm
+      objectReference: {fileID: 0}
+    - target: {fileID: 232537820502236588, guid: 7be997d576b390a498d3f1606578791f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[22].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HandleCircuitSimulatorPlacingCircuitCancel
+      objectReference: {fileID: 0}
+    - target: {fileID: 232537820502236588, guid: 7be997d576b390a498d3f1606578791f, type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: CircuitSimulatorComparingOutputs, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 232537820502236588, guid: 7be997d576b390a498d3f1606578791f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CircuitSimulatorPlacingCircuits, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 232537820502236588, guid: 7be997d576b390a498d3f1606578791f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[21].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CircuitSimulatorPlacingCircuits, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 232537820502236588, guid: 7be997d576b390a498d3f1606578791f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[22].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CircuitSimulatorPlacingCircuits, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 232537820502236588, guid: 7be997d576b390a498d3f1606578791f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 232537820502236588, guid: 7be997d576b390a498d3f1606578791f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[21].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 232537820502236588, guid: 7be997d576b390a498d3f1606578791f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[22].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 232537820502236590, guid: 7be997d576b390a498d3f1606578791f, type: 3}
       propertyPath: m_Name
@@ -2484,11 +2552,15 @@ MonoBehaviour:
   boundary: {x: 0, y: 0, z: 0}
   globalLBBoundary: {x: 0, y: 0, z: 0}
   globalRTBoundary: {x: 0, y: 0, z: 0}
-  timeToMove: 0
-  movementSounds: []
-  confirmSound: {fileID: 0}
-  cancelSound: {fileID: 0}
-  errorSound: {fileID: 0}
+  timeToMove: 0.1
+  movementSounds:
+  - {fileID: 8300000, guid: ef6fde0813b2a1e49ac41616a88750ee, type: 3}
+  - {fileID: 8300000, guid: cc81de1fe2f74d04797001f52895026d, type: 3}
+  - {fileID: 8300000, guid: c7f7741935d89b843812813402a794db, type: 3}
+  confirmSound: {fileID: 8300000, guid: c7f7741935d89b843812813402a794db, type: 3}
+  cancelSound: {fileID: 8300000, guid: c7f7741935d89b843812813402a794db, type: 3}
+  errorSound: {fileID: 8300000, guid: c7f7741935d89b843812813402a794db, type: 3}
+  prefab: {fileID: 0}
 --- !u!1 &2114760644
 GameObject:
   m_ObjectHideFlags: 0

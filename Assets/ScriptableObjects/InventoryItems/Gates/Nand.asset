@@ -18,4 +18,4 @@ MonoBehaviour:
   prefab: {fileID: 0}
   type: 0
   pickupSound: {fileID: 0}
-  isLogicGate: 0
+  isLogicGate: 1

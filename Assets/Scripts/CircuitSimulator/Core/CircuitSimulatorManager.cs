@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
@@ -18,10 +19,8 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
     public PlayerInput circuitSimulatorPlayerInput;
     public SpriteRenderer circuitSimulatorPlayerCursor;
     public Sprite defaultCursorSprite;
-    
-    // Referência para o CircuitSimulatorPlacingCircuits
-    [HideInInspector] public CircuitSimulatorPlacingCircuits circuitSimulatorPlacingCircuits;
-    
+    public CircuitSimulatorPlacingCircuits circuitSimulatorPlacingCircuits;
+
     [Space(10)]
     [Header("Manager Settings")]
     public Grid grid;
@@ -49,6 +48,7 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
     public GameObject NOT;
     public GameObject Reader;
 
+    [HideInInspector] public List<Gate> levelGates = new List<Gate>();
     [HideInInspector] public List<Gate> userGates = new List<Gate>();
 
     void Start()
@@ -57,6 +57,8 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
         circuitSimulatorRenderer.width = backgroundWidth;
         circuitSimulatorRenderer.height = backgroundHeight;
         circuitSimulatorRenderer.FillBackground();
+        
+        //TODO: Adicionar todos os gates do level na lista
 
         var g1 = Instantiate(Generator, logicGatesParent.transform);
         g1.GetComponent<GENERATORGate>().Initialize(new Vector3Int(3, 11));
@@ -121,24 +123,33 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
 
     public void StartPlacingCircuit(InventoryItem item)
     {
+        Debug.Log(item);
         GameObject gate = ConvertItemDataToPrefab(item);
         if (gate == null) return;
         
         UpdateCursorSprite(gate);
         
-        circuitSimulatorPlayerInput.SwitchCurrentActionMap("PlacingCircuits");
-        //TODO: Implementar pegar referencia de CircuitSimulatorPlacingCircuits e o método Setup
+        GameManager.Instance.ChangeState(GameState.CircuitSimulatorPlacingCircuits);
+        circuitSimulatorPlacingCircuits.Setup(gate, item);
     }
 
     public void UpdateCursorSprite(GameObject gateGO)
     {
         Gate gate = gateGO.GetComponent<Gate>();
         circuitSimulatorPlayerCursor.sprite = gate.properties.sprite;
+        circuitSimulatorPlayerCursor.color = new Color(1f, 1f, 1f, 0.6f);
     }
 
+    public void UpdateCursorSpriteAvailability(bool isValid)
+    {
+        circuitSimulatorPlayerCursor.color =
+            isValid ? ColorPalette.validPlacePosition : ColorPalette.invalidPlacePosition;
+    }
+    
     public void ResetCursorSprite()
     {
         circuitSimulatorPlayerCursor.sprite = defaultCursorSprite;
+        circuitSimulatorPlayerCursor.color = new Color(1f, 1f, 1f, 1f);
     }
     
     public GameObject ConvertItemDataToPrefab(InventoryItem item)

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,6 +26,10 @@ public class CircuitSimulatorPlacingCircuits : MonoBehaviour
     public AudioClip confirmSound;
     public AudioClip cancelSound;
     public AudioClip errorSound;
+    private bool canPlace;
+
+    [HideInInspector] public GameObject prefab;
+    [HideInInspector] public InventoryItem item;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +51,25 @@ public class CircuitSimulatorPlacingCircuits : MonoBehaviour
         }
     }
 
+    public void Setup(GameObject prefab, InventoryItem item)
+    {
+        this.prefab = prefab;
+        this.item = item;
+    }
+
+    public bool CheckPosition(Vector3Int cursorPosition)
+    {
+        //TODO: Implementar se a posição de inserção é válida e retornar o resultado
+        /*
+         * Para isso, iterar sobre a lista levelGates e useGates
+         * para cada gate, pegar size
+         * Comparar com posição atual
+         * Se houver intersecção define como false
+         * Senão, define como verdadeiro
+         */
+        return true;
+    }
+    
     /*
      * Handlers do Movement InputMap
      * Convenção de nome: Handle<Nome do Input Action><Nome do Mapping><Nome da Action>
@@ -64,11 +88,15 @@ public class CircuitSimulatorPlacingCircuits : MonoBehaviour
     public void HandleCircuitSimulatorPlacingCircuitConfirm(InputAction.CallbackContext context)
     {
         //TODO: Implementar instanciar o novo logic gate
+        SoundManager.Instance.PlaySound(confirmSound);
     }
     
     public void HandleCircuitSimulatorPlacingCircuitCancel(InputAction.CallbackContext context)
     {
-        //TODO: Implementar sair do modo placingCircuits
+        SoundManager.Instance.PlaySound(cancelSound);
+        CircuitSimulatorManager.Instance.ResetCursorSprite();
+        GameManager.Instance.ChangeState(GameState.CircuitSimulatorMoving);
+        CircuitSimulatorManager.Instance.circuitSimulatorPlayerInput.SwitchCurrentActionMap("Movement");
     }
     
     public IEnumerator MoveCursor(Vector3 direction)
@@ -91,6 +119,13 @@ public class CircuitSimulatorPlacingCircuits : MonoBehaviour
         }
 
         Vector3Int cellPosition = CircuitSimulatorManager.Instance.grid.WorldToCell(transform.position);
+
+        if (CheckPosition(cellPosition) != canPlace)
+        {
+            canPlace = CheckPosition(cellPosition);
+            CircuitSimulatorManager.Instance.UpdateCursorSpriteAvailability(canPlace);
+        }
+        
         transform.position = CircuitSimulatorManager.Instance.grid.GetCellCenterWorld(cellPosition);
 
         isMoving = false;

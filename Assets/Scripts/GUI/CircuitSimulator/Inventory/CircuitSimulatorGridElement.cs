@@ -37,5 +37,8 @@ public class CircuitSimulatorGridElement : MonoBehaviour
     private void HandleSelectItem()
     {
         CircuitSimulatorManager.Instance.StartPlacingCircuit(this.inventoryItem);
+        GameManager.Instance.ChangeState(GameState.CircuitSimulatorPlacingCircuits);
+        CircuitSimulatorManager.Instance.circuitSimulatorPlayerInput.SwitchCurrentActionMap("PlacingCircuits");
+
     }
 }

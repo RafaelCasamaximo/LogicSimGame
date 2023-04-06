@@ -165,6 +165,9 @@ public class GameManager : Singleton<GameManager>
 
     private void HandleCircuitSimulatorPlacingCircuits()
     {
+        GameManagerUtilities.LockMouse();
+        GUIManager.Instance.HideAll();
+        GUIManager.Instance.Show("CircuitSimulatorPersistentGUI");
     }
 
     private void HandleCircuitSimulatorPlacingWires()
