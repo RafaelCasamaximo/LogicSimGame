@@ -13,8 +13,17 @@ using UnityEngine.Tilemaps;
 /// </summary>
 public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
 {
-    [Header("Manager Settings")]
+    [Header("Player Dependecies")]
+    public GameObject circuitSimulatorPlayer;
     public PlayerInput circuitSimulatorPlayerInput;
+    public SpriteRenderer circuitSimulatorPlayerCursor;
+    public Sprite defaultCursorSprite;
+    
+    // Referência para o CircuitSimulatorPlacingCircuits
+    [HideInInspector] public CircuitSimulatorPlacingCircuits circuitSimulatorPlacingCircuits;
+    
+    [Space(10)]
+    [Header("Manager Settings")]
     public Grid grid;
     public int backgroundWidth;
     public int backgroundHeight;
@@ -39,7 +48,9 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
     public GameObject XNOR;
     public GameObject NOT;
     public GameObject Reader;
-    
+
+    [HideInInspector] public List<Gate> userGates = new List<Gate>();
+
     void Start()
     {
         circuitSimulatorRenderer = GetComponent<CircuitSimulatorRenderer>();
@@ -106,6 +117,51 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
         
         // not2.GetComponent<NOTGate>().Delete();
         
+    }
+
+    public void StartPlacingCircuit(InventoryItem item)
+    {
+        GameObject gate = ConvertItemDataToPrefab(item);
+        if (gate == null) return;
+        
+        UpdateCursorSprite(gate);
+        
+        circuitSimulatorPlayerInput.SwitchCurrentActionMap("PlacingCircuits");
+        //TODO: Implementar pegar referencia de CircuitSimulatorPlacingCircuits e o método Setup
+    }
+
+    public void UpdateCursorSprite(GameObject gateGO)
+    {
+        Gate gate = gateGO.GetComponent<Gate>();
+        circuitSimulatorPlayerCursor.sprite = gate.properties.sprite;
+    }
+
+    public void ResetCursorSprite()
+    {
+        circuitSimulatorPlayerCursor.sprite = defaultCursorSprite;
+    }
+    
+    public GameObject ConvertItemDataToPrefab(InventoryItem item)
+    {
+        switch (item.data.id)
+        {
+            case "andItem":
+                return AND;
+            case "nandItem":
+                return NAND;
+            case "orItem":
+                return OR;
+            case "norItem":
+                return NOR;
+            case "xorItem":
+                return XOR;
+            case "xnorItem":
+                return XNOR;
+            case "notItem":
+                return NOT;
+        }
+
+        return null;
     }
 
     // // Itera sobre a lista de Gates que foram inseridas pelo o jogador e deleta todos

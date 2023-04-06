@@ -23,7 +23,7 @@ public class CircuitSimulatorGridElement : MonoBehaviour
     public void Set(InventoryItem item)
     {
         inventoryItem = item;
-        // button.onClick.AddListener(delegate { HandleSelectItem(); });
+        button.onClick.AddListener(HandleSelectItem);
         icon.sprite = item.data.icon;
         tooltip.SetActive(true);
         if (item.stackSize <= 1)
@@ -36,6 +36,6 @@ public class CircuitSimulatorGridElement : MonoBehaviour
 
     private void HandleSelectItem()
     {
-        
+        CircuitSimulatorManager.Instance.StartPlacingCircuit(this.inventoryItem);
     }
 }

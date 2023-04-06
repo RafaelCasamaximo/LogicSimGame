@@ -31,7 +31,7 @@ public class GridElement : MonoBehaviour
     public void Set(InventoryItem item)
     {
         inventoryItem = item;
-        button.onClick.AddListener(delegate { HandleSelectItem(); });
+        button.onClick.AddListener(HandleSelectItem);
         displayName.text = item.data.displayName;
         icon.sprite = item.data.icon;
         tooltip.SetActive(true);

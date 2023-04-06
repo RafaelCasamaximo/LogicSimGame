@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class CircuitSimulatorMovement : MonoBehaviour
 {
+    
     private Camera _camera;
     private int backgroundWidth;
     private int backgroundHeight;
@@ -13,15 +14,18 @@ public class CircuitSimulatorMovement : MonoBehaviour
     private float verticalMin;
     private float verticalMax;
     private Vector2 cursorMovement;
-    public Vector3 origPos;
-    public Vector3 targetPos;
+    [HideInInspector] public Vector3 origPos;
+    [HideInInspector] public Vector3 targetPos;
+    [HideInInspector] public Vector3Int boundary;
+    [HideInInspector] public Vector3 globalLBBoundary;
+    [HideInInspector] public Vector3 globalRTBoundary;
+    [HideInInspector] public bool isMoving;
+    
+    [Header("Movement Settings")]
     public float timeToMove;
     public AudioClip[] movementSounds;
-    public Vector3Int boundary;
-    public Vector3 globalLBBoundary;
-    public Vector3 globalRTBoundary;
 
-    public bool isMoving;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -130,7 +134,6 @@ public class CircuitSimulatorMovement : MonoBehaviour
         }
 
         Vector3Int cellPosition = CircuitSimulatorManager.Instance.grid.WorldToCell(transform.position);
-        // cellPosition.Clamp(Vector3Int.zero, boundary);
         transform.position = CircuitSimulatorManager.Instance.grid.GetCellCenterWorld(cellPosition);
 
         isMoving = false;
