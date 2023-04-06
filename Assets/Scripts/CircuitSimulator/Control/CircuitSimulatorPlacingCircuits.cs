@@ -70,6 +70,20 @@ public class CircuitSimulatorPlacingCircuits : MonoBehaviour
          * Se houver intersecção define como false
          * Senão, define como verdadeiro
          */
+        var currentPoints = SizeToCell(prefab.GetComponent<Gate>().properties.size, cellPosition);
+        bool intersects = false;
+        foreach (var gateGO in CircuitSimulatorManager.Instance.levelGates)
+        {
+            Gate gate = gateGO.GetComponent<Gate>();
+            intersects = CheckRectangleIntersection(currentPoints, SizeToCell(gate.properties.size, gate.properties.gridPosition));
+            if (intersects) return false;
+        }
+        foreach (var gateGO in CircuitSimulatorManager.Instance.userGates)
+        {
+            Gate gate = gateGO.GetComponent<Gate>();
+            intersects = CheckRectangleIntersection(currentPoints, SizeToCell(gate.properties.size, gate.properties.gridPosition));
+            if (intersects) return false;
+        }
         return true;
     }
     
@@ -188,5 +202,59 @@ public class CircuitSimulatorPlacingCircuits : MonoBehaviour
 
         isMoving = false;
     }
+
+    private Vector3Int[] SizeToCell(Vector3Int size, Vector3Int position)
+    {
+        Vector3Int[] points = new Vector3Int[4];
+        points[0] = position;
+        points[1] = position;
+        points[2] = position;
+        points[3] = position;
+        
+        if (size.x != 3 || size.y != 3) return points;
+        
+        points[0].x = position.x - 1;
+        points[0].y = position.y - 1;
+        points[1].x = position.x - 1;
+        points[1].y = position.y + 1;
+        points[2].x = position.x + 1;
+        points[2].y = position.y + 1;
+        points[3].x = position.x + 1;
+        points[3].y = position.y - 1;
+
+        return points;
+    }
+
+    private bool CheckRectangleIntersection(Vector3Int[] r1, Vector3Int[] r2)
+    {
+        // Check if the two rectangles intersect by checking if their bounding boxes overlap
+        int r1MinX = int.MaxValue, r1MaxX = int.MinValue, r1MinY = int.MaxValue, r1MaxY = int.MinValue;
+        int r2MinX = int.MaxValue, r2MaxX = int.MinValue, r2MinY = int.MaxValue, r2MaxY = int.MinValue;
+
+        // Find the minimum and maximum X and Y values for each rectangle
+        for (int i = 0; i < 4; i++)
+        {
+            // Rectangle 1
+            if (r1[i].x < r1MinX) r1MinX = r1[i].x;
+            if (r1[i].x > r1MaxX) r1MaxX = r1[i].x;
+            if (r1[i].y < r1MinY) r1MinY = r1[i].y;
+            if (r1[i].y > r1MaxY) r1MaxY = r1[i].y;
+
+            // Rectangle 2
+            if (r2[i].x < r2MinX) r2MinX = r2[i].x;
+            if (r2[i].x > r2MaxX) r2MaxX = r2[i].x;
+            if (r2[i].y < r2MinY) r2MinY = r2[i].y;
+            if (r2[i].y > r2MaxY) r2MaxY = r2[i].y;
+        }
+
+        // Check if the bounding boxes overlap
+        bool xOverlap = (r1MinX <= r2MaxX) && (r1MaxX >= r2MinX);
+        bool yOverlap = (r1MinY <= r2MaxY) && (r1MaxY >= r2MinY);
+
+        // Return true if there is an overlap in both the X and Y axes
+        return xOverlap && yOverlap;
+    }
+
+
     
 }

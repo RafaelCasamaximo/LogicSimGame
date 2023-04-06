@@ -63,62 +63,58 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
         var g1 = Instantiate(Generator, logicGatesParent.transform);
         g1.GetComponent<GENERATORGate>().Initialize(new Vector3Int(3, 11));
         g1.GetComponent<GENERATORGate>().SetState(true);
+        levelGates.Add(g1);
         
         var g2 = Instantiate(Generator, logicGatesParent.transform);
         g2.GetComponent<GENERATORGate>().Initialize(new Vector3Int(3, 9));
         g2.GetComponent<GENERATORGate>().SetState(true);
+        levelGates.Add(g2);
         
         var g3 = Instantiate(Generator, logicGatesParent.transform);
         g3.GetComponent<GENERATORGate>().Initialize(new Vector3Int(3, 7));
         g3.GetComponent<GENERATORGate>().SetState(true);
+        levelGates.Add(g3);
         
         var and = Instantiate(AND, logicGatesParent.transform);
         and.GetComponent<ANDGate>().Initialize(new Vector3Int(8, 10));
         and.GetComponent<ANDGate>().ChangeInput1(g1);
         and.GetComponent<ANDGate>().ChangeInput2(g2);
-
+        levelGates.Add(and);
+        
         var not1 = Instantiate(NOT, logicGatesParent.transform);
         not1.GetComponent<NOTGate>().Initialize(new Vector3Int(5, 7));
         not1.GetComponent<NOTGate>().ChangeInput1(g3);
+        levelGates.Add(not1);
         
         var not2 = Instantiate(NOT, logicGatesParent.transform);
         not2.GetComponent<NOTGate>().Initialize(new Vector3Int(7, 8));
         not2.GetComponent<NOTGate>().ChangeInput1(g2);
+        levelGates.Add(not2);
 
         var nor = Instantiate(NOR, logicGatesParent.transform);
         nor.GetComponent<NORGate>().Initialize(new Vector3Int(10, 7));
         nor.GetComponent<NORGate>().ChangeInput1(not2);
         nor.GetComponent<NORGate>().ChangeInput2(not1);
+        levelGates.Add(nor);
         
         var xor = Instantiate(XOR, logicGatesParent.transform);
         xor.GetComponent<XORGate>().Initialize(new Vector3Int(14, 9));
         xor.GetComponent<XORGate>().ChangeInput1(and);
         xor.GetComponent<XORGate>().ChangeInput2(nor);
+        levelGates.Add(xor);
 
         var reader = Instantiate(Reader, logicGatesParent.transform);
         reader.GetComponent<READERGate>().Initialize(new Vector3Int(18, 9));
         reader.GetComponent<READERGate>().ChangeInput1(xor);
+        levelGates.Add(reader);
 
         GameManager.Instance.ChangeState(GameState.CircuitSimulatorMoving);
         circuitSimulatorPlayerInput.SwitchCurrentActionMap("Movement");
         SoundManager.Instance.PlayMusic(0);
         SoundManager.Instance.ChangeMusicVolume(0.015f);
         
-        StartCoroutine(changeGenerators(g1, g2, g3, and));
-        
-        //and.GetComponent<ANDGate>().RemoveInput1();
-        
-        and.GetComponent<ANDGate>().Delete();
-        
-        var and2 = Instantiate(AND, logicGatesParent.transform);
-        and2.GetComponent<ANDGate>().Initialize(new Vector3Int(8, 10));
-        and2.GetComponent<ANDGate>().ChangeInput1(g1);
-        and2.GetComponent<ANDGate>().ChangeInput2(g2);
-        
-        xor.GetComponent<XORGate>().ChangeInput1(and2);
-        
-        // not2.GetComponent<NOTGate>().Delete();
-        
+        StartCoroutine(changeGenerators(g1, g2, g3));
+
     }
 
     public void StartPlacingCircuit(InventoryItem item)
@@ -126,12 +122,13 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
         GameObject gate = ConvertItemDataToPrefab(item);
         if (gate == null) return;
         
+        circuitSimulatorPlacingCircuits.Setup(gate, item);
         UpdateCursorSprite(gate);
         circuitSimulatorPlacingCircuits.canPlace = circuitSimulatorPlacingCircuits.CheckPosition(circuitSimulatorPlacingCircuits.cellPosition);
         UpdateCursorSpriteAvailability(circuitSimulatorPlacingCircuits.canPlace);
         
         GameManager.Instance.ChangeState(GameState.CircuitSimulatorPlacingCircuits);
-        circuitSimulatorPlacingCircuits.Setup(gate, item);
+        
     }
 
     public void UpdateCursorSprite(GameObject gateGO)
@@ -192,7 +189,7 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
     //     circuitSimulatorRenderer.logicGatesTileMap.ClearAllTiles();
     // }
 
-    public IEnumerator changeGenerators(GameObject go1, GameObject go2, GameObject go3, GameObject and)
+    public IEnumerator changeGenerators(GameObject go1, GameObject go2, GameObject go3)
     {
         yield return new WaitForSeconds(1.5f);
         go1.GetComponent<GENERATORGate>().SetState(!go1.GetComponent<GENERATORGate>().output.state);
@@ -206,7 +203,7 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
         go2.GetComponent<GENERATORGate>().SetState(!go2.GetComponent<GENERATORGate>().output.state);
         yield return new WaitForSeconds(1.5f);
         go3.GetComponent<GENERATORGate>().SetState(!go3.GetComponent<GENERATORGate>().output.state);
-        StartCoroutine(changeGenerators(go1, go2, go3, and));
+        StartCoroutine(changeGenerators(go1, go2, go3));
     }
     
 }
