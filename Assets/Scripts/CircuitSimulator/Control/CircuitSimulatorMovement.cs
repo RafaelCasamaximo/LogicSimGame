@@ -108,6 +108,17 @@ public class CircuitSimulatorMovement : MonoBehaviour
      * Handlers do Movement InputMap
      * Convenção de nome: Handle<Nome do Input Action><Nome do Mapping><Nome da Action>
      */
+    public void HandleCircuitSimulatorMovementPlacingWires(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        CircuitSimulatorManager.Instance.StartPlacingWires();
+        GameManager.Instance.ChangeState(GameState.CircuitSimulatorPlacingWires);
+    }
+    
+    /*
+     * Handlers do Movement InputMap
+     * Convenção de nome: Handle<Nome do Input Action><Nome do Mapping><Nome da Action>
+     */
     public void HandleCircuitSimulatorMovementResetCircuit(InputAction.CallbackContext context)
     {
         if (!context.performed) return;

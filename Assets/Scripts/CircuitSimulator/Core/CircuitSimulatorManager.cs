@@ -117,6 +117,17 @@ public class CircuitSimulatorManager : Singleton<CircuitSimulatorManager>
 
     }
 
+    public void StartPlacingWires()
+    {
+        // Pegar posição em célula
+        // Iterar pra ver se algum output está nesse local
+        // Se não tem, faz barulho de erro e retorna
+        // Se tem, altera o CurrentActionMap
+        // Executa CircuitSimulatorPlacingWires.Setup()
+        CircuitSimulatorManager.Instance.circuitSimulatorPlayerInput.SwitchCurrentActionMap("PlacingWires");
+        
+    }
+
     public void StartPlacingCircuit(InventoryItem item)
     {
         GameObject gate = ConvertItemDataToPrefab(item);

@@ -105,7 +105,6 @@ public class CircuitSimulatorPlacingCircuits : MonoBehaviour
     public void HandleCircuitSimulatorPlacingCircuitConfirm(InputAction.CallbackContext context)
     {
         if (!context.performed) return;
-        //TODO: Implementar instanciar o novo logic gate
         if (isMoving)
         {
             return;
@@ -165,6 +164,7 @@ public class CircuitSimulatorPlacingCircuits : MonoBehaviour
     
     public void HandleCircuitSimulatorPlacingCircuitCancel(InputAction.CallbackContext context)
     {
+        if (!context.performed) return;
         SoundManager.Instance.PlaySound(cancelSound);
         CircuitSimulatorManager.Instance.ResetCursorSprite();
         GameManager.Instance.ChangeState(GameState.CircuitSimulatorMoving);
