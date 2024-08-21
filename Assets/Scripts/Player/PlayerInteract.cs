@@ -49,6 +49,10 @@ public class PlayerInteract : MonoBehaviour
                         DialogueTrigger dialogueTrigger = hit.collider.gameObject.GetComponent<DialogueTrigger>();
                         dialogueTrigger.InteractTriggerDialogue();
                         break;
+                    case "PuzzleScreen":
+                        Debug.Log("Tela com circuito");
+                        LevelManager.Instance.LoadScene("CircuitSimulator", GameState.Start);
+                        break;
                     default:
                         Debug.Log("Outro");
                         break;
